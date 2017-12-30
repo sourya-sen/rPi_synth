@@ -123,7 +123,7 @@ void ofApp::draw(){
 		ofDrawBitmapStringHighlight(ofToString(mux[i]), i * spacing + 20, 30);
 	}
 
-  ofDrawBitmapStringHighlight(ofToString(o_cv0), 0, ofGetHeight() - 20);
+  ofDrawBitmapStringHighlight(ofToString(o_cv[0]), 0, ofGetHeight() - 20);
 
 }
 
