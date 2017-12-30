@@ -58,8 +58,8 @@ void ofApp::update(){
 	usleep(100);
 	}
 
-  o_system = ofBinaryToInt(100 * ofToInt(mux[0]) + 10 * ofToInt(mux[1]) + ofToInt(mux[2]));
-  o_subSystem = ofBinaryToInt(10 * ofToInt(mux[3]) + ofToInt(mux[4]));
+  o_system = ofBinaryToInt(ofToString(100 * ofToInt(mux[0]) + 10 * ofToInt(mux[1]) + ofToInt(mux[2])));
+  o_subSystem = ofBinaryToInt(ofToString(10 * ofToInt(mux[3]) + ofToInt(mux[4])));
 
   if(mux[7] == "1"){
     o_draw = true;
@@ -101,7 +101,7 @@ void ofApp::draw(){
 		ofDrawBitmapStringHighlight(ofToString(mux[i]), i * spacing + 20, 30);
 	}
 
-  ofDrawBitmapStringHighlight(ofToString(o_cv0), 0, ofGetHeight - 20);
+  ofDrawBitmapStringHighlight(ofToString(o_cv0), 0, ofGetHeight() - 20);
 
 }
 
