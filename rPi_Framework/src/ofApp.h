@@ -2,6 +2,10 @@
 
 #include "ofMain.h"
 #include "ofxGPIO.h"
+#include "ofxOsc.h"
+
+#define HOST "localhost"
+#define PORT 12345
 
 class ofApp : public ofBaseApp{
 
@@ -36,5 +40,7 @@ class ofApp : public ofBaseApp{
 		bool o_draw;
 		bool o_fx0, o_fx1;
 		float o_cv0, o_cv1, o_cv2, o_cv3;
+
+		ofxOscSender sender;
 
 };

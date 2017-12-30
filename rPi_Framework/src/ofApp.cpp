@@ -30,6 +30,9 @@ void ofApp::setup(){
 		m = "0";
 	}
 
+  o_cv.resize(4);
+  sender.setup(HOST, PORT);
+
 }
 
 //--------------------------------------------------------------
@@ -81,10 +84,29 @@ void ofApp::update(){
 
   int max = 1023 * 1023;
 
-  o_cv0 = ofMap(analogIn[0] * analogIn[4], 0, max, 0, 1.0f);
-  o_cv1 = ofMap(analogIn[1] * analogIn[5], 0, max, 0, 1.0f);
-  o_cv2 = ofMap(analogIn[2] * analogIn[6], 0, max, 0, 1.0f);
-  o_cv3 = ofMap(analogIn[3] * analogIn[7], 0, max, 0, 1.0f);
+  for(int i = 0; i< o_cv.size(); i++){
+    o_cv[i] = ofMap(analogIn[i] * analogIn[i+4], 0, max, 0, 1.0f);
+  }
+
+  //Let's send everything over OSC :)
+  ofxOscMessage system;
+  system.setAddress("/sys");
+  system.addIntArg(o_system);
+  sender.sendMessage(system, false);
+
+  ofxOscMessage subSystem;
+  subSystem.setAddress("/subSys");
+  subSystem.addIntArg(o_subSystem);
+  sender.sendMessage(subSystem, false);
+
+  for(int i = 0; i<o_cv.size(); i++){
+    ofxOscMessage cv;
+    cv.setAddress("/cv" + ofToString(i));
+    cv.addFloatArg(o_cv[i]);
+    sender.sendMessage(cv, false);
+  }
+
+  //TODO: Add the FX stuff to send over OSC
 
 }
 
