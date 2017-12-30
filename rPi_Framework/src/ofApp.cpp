@@ -77,9 +77,9 @@ void ofApp::update(){
   }
 
   if(mux[5] == "1"){
-    o_fx0 = true;
+    o_fx1 = true;
   } else {
-    o_fx0 = false;
+    o_fx1 = false;
   }
 
   int max = 1023 * 1023;
@@ -89,6 +89,8 @@ void ofApp::update(){
   }
 
   //Let's send everything over OSC :)
+  //TODO: SEND ONLY IF THEY'RE NEW VALUES -> Add checks!
+  
   ofxOscMessage system;
   system.setAddress("/sys");
   system.addIntArg(o_system);
@@ -106,13 +108,26 @@ void ofApp::update(){
     sender.sendMessage(cv, false);
   }
 
-  //TODO: Add the FX stuff to send over OSC
+  ofxOscMessage draw;
+  draw.setAddress("/draw");
+  draw.addBoolArg(o_draw);
+  sender.sendMessage(draw, false);
+
+  ofxOscMessage fx0;
+  fx0.setAddress("/fx0");
+  fx0.addBoolArg(o_fx0);
+  sender.sendMessage(fx0, false);
+
+  ofxOscMessage fx1;
+  fx1.setAddress("/fx1");
+  fx1.addBoolArg(o_fx1);
+  sender.sendMessage(fx1, false);
 
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+/*
   for(int i = 0; i < analogIn.size(); i++){
 		float spacing = (ofGetWidth()/2)/float(analogIn.size());
 		ofDrawBitmapStringHighlight(ofToString(analogIn[i]), i * spacing + 20, 10);
