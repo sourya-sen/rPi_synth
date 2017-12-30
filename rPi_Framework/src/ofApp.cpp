@@ -36,26 +36,28 @@ void ofApp::setup(){
 void ofApp::update(){
 
   for(int i = 0; i < chip; i++){
-			analogIn[i] =  a2d.getValueAllChannel(chip)[i];
-      usleep(100);
+	if(i<4){
+	analogIn[i] = 1023 - a2d.getValueAllChannel(chip)[i]; //fix potentiometer wired the wrong way by inverting the value :P
+	} else {
+	analogIn[i] = a2d.getValueAllChannel(chip)[i];
+	}
+      	usleep(100);
     }
 
   int r0 [] = {0, 1, 0, 1, 0, 1, 0, 1};
-	int r1 [] = {0, 0, 1, 1, 0, 0, 1, 1};
-	int r2 [] = {0, 0, 0, 0, 1, 1, 1, 1};
+  int r1 [] = {0, 0, 1, 1, 0, 0, 1, 1};
+  int r2 [] = {0, 0, 0, 0, 1, 1, 1, 1};
 
-	for(int i = 0; i< mux.size(); i++){
+  for(int i = 0; i< mux.size(); i++){
 
-		gpio14.setval_gpio(ofToString(r0[i]));
-		gpio15.setval_gpio(ofToString(r1[i]));
-		gpio18.setval_gpio(ofToString(r2[i]));
+	gpio14.setval_gpio(ofToString(r0[i]));
+	gpio15.setval_gpio(ofToString(r1[i]));
+	gpio18.setval_gpio(ofToString(r2[i]));
 
-		gpio17.getval_gpio(mux[i]);
-		usleep(500);
+	gpio17.getval_gpio(mux[i]);
+	usleep(100);
 
 	}
-
-
 }
 
 //--------------------------------------------------------------
