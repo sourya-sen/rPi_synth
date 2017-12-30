@@ -39,7 +39,7 @@ class ofApp : public ofBaseApp{
 		int o_subSystem;
 		bool o_draw;
 		bool o_fx0, o_fx1;
-		float o_cv0, o_cv1, o_cv2, o_cv3;
+		vector<float> o_cv;
 
 		ofxOscSender sender;
 
