@@ -139,7 +139,7 @@ void ofApp::draw(){
 	}
 
   ofDrawBitmapStringHighlight(ofToString(o_cv[0]), 0, ofGetHeight() - 20);
-
+*/
 }
 
 //--------------------------------------------------------------
