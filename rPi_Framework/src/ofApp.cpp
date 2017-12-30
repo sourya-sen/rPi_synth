@@ -36,12 +36,12 @@ void ofApp::setup(){
 void ofApp::update(){
 
   for(int i = 0; i < chip; i++){
-	if(i<4){
-	analogIn[i] = 1023 - a2d.getValueAllChannel(chip)[i]; //fix potentiometer wired the wrong way by inverting the value :P
-	} else {
-	analogIn[i] = a2d.getValueAllChannel(chip)[i];
-	}
-      	usleep(100);
+	   if(i<4){
+	      analogIn[i] = 1023 - a2d.getValueAllChannel(chip)[i]; //fix potentiometer wired the wrong way by inverting the value :P
+	     } else {
+	        analogIn[i] = a2d.getValueAllChannel(chip)[i];
+	       }
+      usleep(100);
     }
 
   int r0 [] = {0, 1, 0, 1, 0, 1, 0, 1};
@@ -56,8 +56,36 @@ void ofApp::update(){
 
 	gpio17.getval_gpio(mux[i]);
 	usleep(100);
-
 	}
+
+  o_system = ofBinaryToInt(100 * ofToInt(mux[0]) + 10 * ofToInt(mux[1]) + ofToInt(mux[2]));
+  o_subSystem = ofBinaryToInt(10 * ofToInt(mux[3]) + ofToInt(mux[4]));
+
+  if(mux[7] == "1"){
+    o_draw = true;
+  } else {
+    o_draw = false;
+  }
+
+  if(mux[6] == "1"){
+    o_fx0 = true;
+  } else {
+    o_fx0 = false;
+  }
+
+  if(mux[5] == "1"){
+    o_fx0 = true;
+  } else {
+    o_fx0 = false;
+  }
+
+  int max = 1023 * 1023;
+
+  o_cv0 = ofMap(analogIn[0] * analogIn[4], 0, max, 0, 1.0f);
+  o_cv1 = ofMap(analogIn[1] * analogIn[5], 0, max, 0, 1.0f);
+  o_cv2 = ofMap(analogIn[2] * analogIn[6], 0, max, 0, 1.0f);
+  o_cv3 = ofMap(analogIn[3] * analogIn[7], 0, max, 0, 1.0f);
+
 }
 
 //--------------------------------------------------------------
@@ -72,6 +100,8 @@ void ofApp::draw(){
 		float spacing = (ofGetWidth()/2)/float(mux.size());
 		ofDrawBitmapStringHighlight(ofToString(mux[i]), i * spacing + 20, 30);
 	}
+
+  ofDrawBitmapStringHighlight(ofToString(o_cv0), 0, ofGetHeight - 20);
 
 }
 

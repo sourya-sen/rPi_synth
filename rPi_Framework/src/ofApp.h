@@ -30,4 +30,11 @@ class ofApp : public ofBaseApp{
 		GPIO gpio14, gpio15, gpio17, gpio18;
 		vector<string> mux;
 
+		//these will be sent over OSC
+		int o_system;
+		int o_subSystem;
+		bool o_draw;
+		bool o_fx0, o_fx1;
+		float o_cv0, o_cv1, o_cv2, o_cv3;
+
 };
