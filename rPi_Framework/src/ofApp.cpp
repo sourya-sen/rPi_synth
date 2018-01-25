@@ -90,7 +90,7 @@ void ofApp::update(){
 
   //Let's send everything over OSC :)
   //TODO: SEND ONLY IF THEY'RE NEW VALUES -> Add checks!
-  
+
   ofxOscMessage system;
   system.setAddress("/sys");
   system.addIntArg(o_system);
@@ -123,6 +123,8 @@ void ofApp::update(){
   fx1.addBoolArg(o_fx1);
   sender.sendMessage(fx1, false);
 
+  cout << "CVs: " << o_cv[0] << " - " << o_cv[1] << " - " << o_cv[2] << " - " << "o_cv[3]" << endl;
+  cout << "Triggers: " << mux[0] << mux[1] << mux[2] << mux[3] << mux[4] << mux[5] << mux[6] << mux[7] << endl;
 }
 
 //--------------------------------------------------------------
