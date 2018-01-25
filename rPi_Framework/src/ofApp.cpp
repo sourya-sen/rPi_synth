@@ -123,8 +123,6 @@ void ofApp::update(){
   fx1.addBoolArg(o_fx1);
   sender.sendMessage(fx1, false);
 
-  cout << "CVs: " << o_cv[0] << " - " << o_cv[1] << " - " << o_cv[2] << " - " << "o_cv[3]" << endl;
-  cout << "Triggers: " << mux[0] << mux[1] << mux[2] << mux[3] << mux[4] << mux[5] << mux[6] << mux[7] << endl;
 }
 
 //--------------------------------------------------------------
@@ -142,6 +140,15 @@ void ofApp::draw(){
 
   ofDrawBitmapStringHighlight(ofToString(o_cv[0]), 0, ofGetHeight() - 20);
 */
+
+
+	stringstream buf1, buf2;
+
+  buf1 << "CVs: " << o_cv[0] << " - " << o_cv[1] << " - " << o_cv[2] << " - " << o_cv[3] << endl;
+  buf2 << "Triggers: " << mux[0] << mux[1] << mux[2] << mux[3] << mux[4] << mux[5] << mux[6] << mux[7] << endl;
+
+ofDrawBitmapStringHighlight(buf1.str(), 20, 20);
+ofDrawBitmapStringHighlight(buf2.str(), 20, 35);
 }
 
 //--------------------------------------------------------------
