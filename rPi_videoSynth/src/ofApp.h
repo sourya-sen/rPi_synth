@@ -29,5 +29,7 @@ class ofApp : public ofBaseApp{
     int system, subSystem;
     bool fx0, fx1, fx2;
     vector<float> CV;
+    
+    bool debugMode;
 		
 };

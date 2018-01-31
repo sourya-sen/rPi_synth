@@ -12,16 +12,53 @@ void ofApp::setup(){
     
     system = 0;
     subSystem = 0;
+    
+    debugMode = true;
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    
+    while(receiver.hasWaitingMessages()){
+        // get the next message
+        ofxOscMessage m;
+        receiver.getNextMessage(m);
+        
+        // check for mouse moved message
+        if(m.getAddress() == "/sys"){
+            system = m.getArgAsInt(0);
+        } else if (m.getAddress() == "/subSys") {
+                system = m.getArgAsInt(0);
+        } else if (m.getAddress() == "/fx0"){
+            fx0 = m.getArgAsBool(0);
+        } else if (m.getAddress() == "/fx1"){
+            fx1 = m.getArgAsBool(0);
+        } else if (m.getAddress() == "fx2"){
+            fx2 = m.getArgAsBool(0);
+        } else if (m.getAddress() == "/cv0"){
+            CV[0] = m.getArgAsFloat(0);
+        } else if (m.getAddress() == "/cv1"){
+            CV[1] = m.getArgAsFloat(0);
+        } else if (m.getAddress() == "/cv2"){
+            CV[2] = m.getArgAsFloat(0);
+        } else if (m.getAddress() == "/cv3"){
+            CV[3] = m.getArgAsFloat(0);
+        }
+        
+    }
 
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    
+    if(debugMode){
+        ofDrawBitmapStringHighlight("System: " + ofToString(system), 10, 15);
+        ofDrawBitmapStringHighlight("Sub System: " + ofToString(subSystem), 10, 30);
+        ofDrawBitmapStringHighlight("FXs:" + ofToString(fx0) + " " + ofToString(fx1) + " " + ofToString(fx2), 10, 45);
+
+    }
 
 }
 

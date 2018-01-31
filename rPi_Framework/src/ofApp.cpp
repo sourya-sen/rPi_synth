@@ -64,16 +64,16 @@ void ofApp::update(){
   o_system = ofBinaryToInt(ofToString(100 * ofToInt(mux[0]) + 10 * ofToInt(mux[1]) + ofToInt(mux[2])));
   o_subSystem = ofBinaryToInt(ofToString(10 * ofToInt(mux[3]) + ofToInt(mux[4])));
 
-  if(mux[6] == "1"){
-    o_fx1 = true;
-  } else {
-    o_fx1 = false;
-  }
-
   if(mux[5] == "1"){
     o_fx0 = true;
   } else {
     o_fx0 = false;
+  }
+
+  if(mux[6] == "1"){
+    o_fx1 = true;
+  } else {
+    o_fx1 = false;
   }
 
   if(mux[7] == "1"){
