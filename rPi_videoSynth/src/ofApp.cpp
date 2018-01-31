@@ -58,6 +58,15 @@ void ofApp::draw(){
         ofDrawBitmapStringHighlight("Sub System: " + ofToString(subSystem), 10, 35);
         ofDrawBitmapStringHighlight("FXs:" + ofToString(fx0) + " " + ofToString(fx1) + " " + ofToString(fx2), 10, 55);
         ofDrawBitmapStringHighlight("CVs:" + ofToString(CV[0]) + " " + ofToString(CV[1]) + " " + ofToString(CV[2]) + " " + ofToString(CV[3]), 10, 75);
+        
+        float spacing = ofGetWidth()/4.0;
+        
+        ofSetColor(ofColor::hotPink);
+        ofDrawCircle(0 *spacing + spacing/2, ofGetHeight()/2, 20 * CV[0]);
+        ofDrawCircle(1 * spacing + spacing/2, ofGetHeight()/2, 20 * CV[1]);
+        ofDrawCircle(2 * spacing + spacing/2, ofGetHeight()/2, 20 * CV[2]);
+        ofDrawCircle(3 * spacing + spacing/2, ofGetHeight()/2, 20 * CV[3]);
+
 
 
     }
