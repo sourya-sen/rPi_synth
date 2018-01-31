@@ -64,23 +64,24 @@ void ofApp::update(){
   o_system = ofBinaryToInt(ofToString(100 * ofToInt(mux[0]) + 10 * ofToInt(mux[1]) + ofToInt(mux[2])));
   o_subSystem = ofBinaryToInt(ofToString(10 * ofToInt(mux[3]) + ofToInt(mux[4])));
 
-  if(mux[7] == "1"){
-    o_draw = true;
+  if(mux[6] == "1"){
+    o_fx1 = true;
   } else {
-    o_draw = false;
+    o_fx1 = false;
   }
 
-  if(mux[6] == "1"){
+  if(mux[5] == "1"){
     o_fx0 = true;
   } else {
     o_fx0 = false;
   }
 
-  if(mux[5] == "1"){
-    o_fx1 = true;
+  if(mux[7] == "1"){
+    o_fx2= true;
   } else {
-    o_fx1 = false;
+    o_fx2 = false;
   }
+
 
   int max = 1023 * 1023;
 
@@ -109,17 +110,17 @@ void ofApp::update(){
   }
 
   ofxOscMessage draw;
-  draw.setAddress("/draw");
+  draw.setAddress("/fx0");
   draw.addBoolArg(o_draw);
   sender.sendMessage(draw, false);
 
   ofxOscMessage fx0;
-  fx0.setAddress("/fx0");
+  fx0.setAddress("/fx1");
   fx0.addBoolArg(o_fx0);
   sender.sendMessage(fx0, false);
 
   ofxOscMessage fx1;
-  fx1.setAddress("/fx1");
+  fx1.setAddress("/fx2");
   fx1.addBoolArg(o_fx1);
   sender.sendMessage(fx1, false);
 
