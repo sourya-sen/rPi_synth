@@ -37,8 +37,7 @@ class ofApp : public ofBaseApp{
 		//these will be sent over OSC
 		int o_system;
 		int o_subSystem;
-		bool o_draw;
-		bool o_fx0, o_fx1;
+		bool o_fx0, o_fx1, o_fx2;
 		vector<float> o_cv;
 
 		ofxOscSender sender;
