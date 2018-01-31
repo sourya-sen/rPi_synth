@@ -55,8 +55,10 @@ void ofApp::draw(){
     
     if(debugMode){
         ofDrawBitmapStringHighlight("System: " + ofToString(system), 10, 15);
-        ofDrawBitmapStringHighlight("Sub System: " + ofToString(subSystem), 10, 30);
-        ofDrawBitmapStringHighlight("FXs:" + ofToString(fx0) + " " + ofToString(fx1) + " " + ofToString(fx2), 10, 45);
+        ofDrawBitmapStringHighlight("Sub System: " + ofToString(subSystem), 10, 35);
+        ofDrawBitmapStringHighlight("FXs:" + ofToString(fx0) + " " + ofToString(fx1) + " " + ofToString(fx2), 10, 55);
+        ofDrawBitmapStringHighlight("CVs:" + ofToString(CV[0]) + " " + ofToString(CV[1]) + " " + ofToString(CV[2]) + " " + ofToString(CV[3]), 10, 75);
+
 
     }
 
