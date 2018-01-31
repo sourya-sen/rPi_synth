@@ -62,10 +62,10 @@ void ofApp::draw(){
         float spacing = ofGetWidth()/4.0;
         
         ofSetColor(ofColor::hotPink);
-        ofDrawCircle(0 *spacing + spacing/2, ofGetHeight()/2, 20 * CV[0]);
-        ofDrawCircle(1 * spacing + spacing/2, ofGetHeight()/2, 20 * CV[1]);
-        ofDrawCircle(2 * spacing + spacing/2, ofGetHeight()/2, 20 * CV[2]);
-        ofDrawCircle(3 * spacing + spacing/2, ofGetHeight()/2, 20 * CV[3]);
+        ofDrawCircle(0 *spacing + spacing/2, ofGetHeight()/2, 100 * CV[0]);
+        ofDrawCircle(1 * spacing + spacing/2, ofGetHeight()/2, 100 * CV[1]);
+        ofDrawCircle(2 * spacing + spacing/2, ofGetHeight()/2, 100 * CV[2]);
+        ofDrawCircle(3 * spacing + spacing/2, ofGetHeight()/2, 100 * CV[3]);
 
 
 
