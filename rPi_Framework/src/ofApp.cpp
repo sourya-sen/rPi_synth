@@ -109,20 +109,20 @@ void ofApp::update(){
     sender.sendMessage(cv, false);
   }
 
-  ofxOscMessage draw;
-  draw.setAddress("/fx0");
-  draw.addBoolArg(o_draw);
-  sender.sendMessage(draw, false);
-
   ofxOscMessage fx0;
-  fx0.setAddress("/fx1");
-  fx0.addBoolArg(o_fx0);
+  draw.setAddress("/fx0");
+  draw.addBoolArg(o_fx0);
   sender.sendMessage(fx0, false);
 
   ofxOscMessage fx1;
-  fx1.setAddress("/fx2");
-  fx1.addBoolArg(o_fx1);
+  fx0.setAddress("/fx1");
+  fx0.addBoolArg(o_fx1);
   sender.sendMessage(fx1, false);
+
+  ofxOscMessage fx2;
+  fx1.setAddress("/fx2");
+  fx1.addBoolArg(o_fx2);
+  sender.sendMessage(fx2, false);
 
 }
 
