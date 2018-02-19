@@ -24,6 +24,8 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
+    void sendUniforms(int selectedShader);
+    
     ofxOscReceiver receiver;
     
     int system, subSystem;
@@ -31,5 +33,7 @@ class ofApp : public ofBaseApp{
     vector<float> CV;
     
     bool debugMode;
+    
+    vector<ofShader> shaders;
 		
 };

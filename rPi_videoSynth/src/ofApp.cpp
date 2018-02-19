@@ -13,7 +13,18 @@ void ofApp::setup(){
     system = 0;
     subSystem = 0;
     
-    debugMode = true;
+    
+    //...load all the shaders here.
+    shaders.resize(1);
+    
+    for(int i = 0; i<shaders.size(); i++){
+        string path = "shaders/";
+        string fileName = ofToString(i) + ".frag";
+        shaders[i].load("shaders/standard.vert", path + fileName);
+    }
+    
+    
+    debugMode = false;
 
 }
 
@@ -66,11 +77,47 @@ void ofApp::draw(){
         ofDrawCircle(1 * spacing + spacing/2, ofGetHeight()/2, 100 * CV[1]);
         ofDrawCircle(2 * spacing + spacing/2, ofGetHeight()/2, 100 * CV[2]);
         ofDrawCircle(3 * spacing + spacing/2, ofGetHeight()/2, 100 * CV[3]);
-
-
-
+    } else {
+        
+        switch(system){
+            case 0:
+                shaders[system].begin();
+                sendUniforms(system);
+                ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+                shaders[system].end();
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            default:
+                break;
+        }
+        
+        
     }
 
+}
+
+//--------------------------------------------------------------
+void ofApp::sendUniforms(int selectedShader){
+    shaders[selectedShader].setUniform1f("CV0", CV[0]);
+    shaders[selectedShader].setUniform1f("CV1", CV[1]);
+    shaders[selectedShader].setUniform1f("CV2", CV[2]);
+    shaders[selectedShader].setUniform1f("CV3", CV[3]);
+    shaders[selectedShader].setUniform1f("time", ofGetElapsedTimef());
+    shaders[selectedShader].setUniform1i("subSystem", subSystem);
+    shaders[selectedShader].setUniform2f("resolution", ofVec2f(ofGetWidth(), ofGetHeight()));
 }
 
 //--------------------------------------------------------------
