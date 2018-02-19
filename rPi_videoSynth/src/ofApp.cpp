@@ -29,12 +29,12 @@ void ofApp::update(){
         if(m.getAddress() == "/sys"){
             system = m.getArgAsInt(0);
         } else if (m.getAddress() == "/subSys") {
-                system = m.getArgAsInt(0);
+                subSystem = m.getArgAsInt(0);
         } else if (m.getAddress() == "/fx0"){
             fx0 = m.getArgAsBool(0);
         } else if (m.getAddress() == "/fx1"){
             fx1 = m.getArgAsBool(0);
-        } else if (m.getAddress() == "fx2"){
+        } else if (m.getAddress() == "/fx2"){
             fx2 = m.getArgAsBool(0);
         } else if (m.getAddress() == "/cv0"){
             CV[0] = m.getArgAsFloat(0);
