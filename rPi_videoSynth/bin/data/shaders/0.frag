@@ -1,7 +1,7 @@
 #pragma include "version.glsl"
 
 #ifdef GLES
-		precision mediump float;
+		precision mediump float
 		#define IN attribute
 		#define OUT varying
 		#define TEXTURE texture2D

@@ -1,7 +1,7 @@
 #pragma include "version.glsl"
 
 #ifdef GLES
-		precision mediump float;
+		precision mediump float
 		#define IN attribute
 		#define OUT varying
 		#define TEXTURE texture2D
@@ -15,7 +15,9 @@
 		out vec4 fragColor
 #endif
 
-	// uniform mat4 projectionMatrix;
+//Desktop Version Below
+
+	uniform mat4 projectionMatrix;
 	uniform mat4 modelViewMatrix;
 	uniform mat4 textureMatrix;
 	uniform mat4 modelViewProjectionMatrix;
