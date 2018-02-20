@@ -133,3 +133,6 @@ Desktop.ini
 
 .mailmap
 /apps*/
+
+# this is different for different platforms so ignoring it here
+*.glsl
