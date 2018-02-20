@@ -1,4 +1,4 @@
-#ifdef GL_ES
+#ifdef GLES
 		precision mediump float;
 		#define IN attribute
 		#define OUT varying
