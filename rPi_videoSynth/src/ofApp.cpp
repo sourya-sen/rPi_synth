@@ -3,6 +3,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
+    ofDisableArbTex();
+    
     receiver.setup(PORT);
     
     CV.resize(4);
