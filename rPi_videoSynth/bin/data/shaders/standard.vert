@@ -1,21 +1,4 @@
-#pragma include "version.glsl"
-
-#ifdef GLES
-		precision mediump float
-		#define IN attribute
-		#define OUT varying
-		#define TEXTURE texture2D
-		#define FRAG_COLOR gl_FragColor
-#else
-		// #version 330
-		#define IN in
-		#define OUT out
-		#define TEXTURE texture
- 		#define FRAG_COLOR fragColor
-		out vec4 fragColor
-#endif
-
-//Desktop Version Below
+#pragma include "headerVert.glsl"
 
 	uniform mat4 projectionMatrix;
 	uniform mat4 modelViewMatrix;

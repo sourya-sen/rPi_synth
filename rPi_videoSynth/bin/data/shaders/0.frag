@@ -1,19 +1,4 @@
-#pragma include "version.glsl"
-
-#ifdef GLES
-		precision mediump float
-		#define IN attribute
-		#define OUT varying
-		#define TEXTURE texture2D
-		#define FRAG_COLOR gl_FragColor
-#else
-		// #version 330
-		#define IN in
-		#define OUT out
-		#define TEXTURE texture
- 		#define FRAG_COLOR fragColor
-		out vec4 fragColor
-#endif
+#pragma include "headerFrag.glsl"
 
 	uniform sampler2D tex;
 	IN vec4 v_color;
