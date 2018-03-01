@@ -63,8 +63,8 @@ void ofApp::update(){
     //----------> MAIN FBO CALL.
     
     mainImage.begin();
-    
-    ofSetColor(255);
+    ofSetColor(0);
+    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
     runSystem(system);
     
     mainImage.end();
@@ -108,6 +108,7 @@ void ofApp::runSystem(int _sys){
     sendUniforms(system);
     ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
     shaders[system].end();
+    
     
 }
 //--------------------------------------------------------------
