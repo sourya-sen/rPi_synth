@@ -16,7 +16,7 @@ void ofApp::setup(){
     subSystem = 0;
     
     //...load all the shaders here.
-    shaders.resize(1);
+    shaders.resize(8);
     
     for(int i = 0; i<shaders.size(); i++){
         string path = "shaders/";
@@ -24,24 +24,24 @@ void ofApp::setup(){
         shaders[i].load("shaders/standard.vert", path + fileName);
     }
     
+    mainImage.allocate(ofGetWidth(), ofGetHeight());
     
     debugMode = false;
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     
     while(receiver.hasWaitingMessages()){
-        // get the next message
+        
         ofxOscMessage m;
         receiver.getNextMessage(m);
         
-        // check for mouse moved message
         if(m.getAddress() == "/sys"){
             system = m.getArgAsInt(0);
         } else if (m.getAddress() == "/subSys") {
-                subSystem = m.getArgAsInt(0);
+            subSystem = m.getArgAsInt(0);
         } else if (m.getAddress() == "/fx0"){
             fx0 = m.getArgAsBool(0);
         } else if (m.getAddress() == "/fx1"){
@@ -57,13 +57,27 @@ void ofApp::update(){
         } else if (m.getAddress() == "/cv3"){
             CV[3] = m.getArgAsFloat(0);
         }
-        
     }
+    
+    
+    //----------> MAIN FBO CALL.
+    
+    mainImage.begin();
+    
+    ofSetColor(255);
+    runSystem(system);
+    
+    mainImage.end();
+    
+    //----------> EFFECTS INTEGRATION FBO (TO DO).
 
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    
+    mainImage.draw(0, 0);
     
     if(debugMode){
         ofDrawBitmapStringHighlight("System: " + ofToString(system), 10, 15);
@@ -71,46 +85,9 @@ void ofApp::draw(){
         ofDrawBitmapStringHighlight("FXs:" + ofToString(fx0) + " " + ofToString(fx1) + " " + ofToString(fx2), 10, 55);
         ofDrawBitmapStringHighlight("CVs:" + ofToString(CV[0]) + " " + ofToString(CV[1]) + " " + ofToString(CV[2]) + " " + ofToString(CV[3]), 10, 75);
         
-        float spacing = ofGetWidth()/4.0;
-        
-        ofSetColor(ofColor::hotPink);
-        ofDrawCircle(0 * spacing + spacing/2, ofGetHeight()/2, 100 * CV[0]);
-        ofDrawCircle(1 * spacing + spacing/2, ofGetHeight()/2, 100 * CV[1]);
-        ofDrawCircle(2 * spacing + spacing/2, ofGetHeight()/2, 100 * CV[2]);
-        ofDrawCircle(3 * spacing + spacing/2, ofGetHeight()/2, 100 * CV[3]);
-        
-    } else {
-        
-        ofSetColor(255);
-        
-        switch(system){
-            case 0:
-                shaders[system].begin();
-                sendUniforms(system);
-                ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
-                shaders[system].end();
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            default:
-                break;
-        }
-        
-        
     }
-
+    
+    
 }
 
 //--------------------------------------------------------------
@@ -122,59 +99,72 @@ void ofApp::sendUniforms(int selectedShader){
     shaders[selectedShader].setUniform1f("time", ofGetElapsedTimef());
     shaders[selectedShader].setUniform1i("subSystem", subSystem);
     shaders[selectedShader].setUniform2f("resolution", ofVec2f(ofGetWidth(), ofGetHeight()));
+    
 }
-
+//--------------------------------------------------------------
+void ofApp::runSystem(int _sys){
+    
+    shaders[system].begin();
+    sendUniforms(system);
+    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+    shaders[system].end();
+    
+}
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-
+    
+    if(key == ' '){
+        debugMode = !debugMode;
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseEntered(int x, int y){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseExited(int x, int y){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
+    
 }

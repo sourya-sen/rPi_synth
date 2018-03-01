@@ -25,6 +25,7 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     void sendUniforms(int selectedShader);
+    void runSystem(int _sys);
     
     ofxOscReceiver receiver;
     
@@ -35,5 +36,6 @@ class ofApp : public ofBaseApp{
     bool debugMode;
     
     vector<ofShader> shaders;
+    ofFbo mainImage;
 		
 };
