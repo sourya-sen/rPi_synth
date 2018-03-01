@@ -17,13 +17,13 @@
 	void main()
 	{
 		const float pi = 3.14;
-    float size = resolution.y / 10; // cell size in pixel
+    float size = resolution.y / 10.0; // cell size in pixel
 
     vec2 p1 = gl_FragCoord.xy / size; // normalized pos
     vec2 p2 = fract(p1) - 0.5; // relative pos from cell center
 
     // random number
-    float rnd = dot(p1, vec2(12.9898, 78.233));
+    float rnd = dot(floor(p1), vec2(12.9898, 78.233));
     rnd = fract(sin(rnd) * 43758.5453);
 
     // rotation matrix
