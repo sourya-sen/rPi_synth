@@ -16,7 +16,7 @@
 
 	void main()
 	{
-		const float pi = 3.14159265359;
+		const float pi = 3.14;
     float size = resolution.y / 10; // cell size in pixel
 
     vec2 p1 = gl_FragCoord.xy / size; // normalized pos
