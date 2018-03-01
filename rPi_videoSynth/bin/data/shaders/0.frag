@@ -23,7 +23,7 @@
     vec2 p2 = fract(p1) - 0.5; // relative pos from cell center
 
     // random number
-    float rnd = dot(vec2(floor(p1.x), floor(p1.y)), vec2(12.9898, 78.233));
+    float rnd = dot(p1, vec2(12.9898, 78.233));
     rnd = fract(sin(rnd) * 43758.5453);
 
     // rotation matrix
