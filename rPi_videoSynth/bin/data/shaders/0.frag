@@ -160,7 +160,7 @@
 	void main()
 	{
 	    // anim
-	    float time = iTime*.15;
+	    float time = time*.15;
 	    vec4 c = 0.4*cos( vec4(0.5,3.9,1.4,1.1) + time*vec4(1.2,1.7,1.3,2.5) ) - vec4(0.3,0.0,0.0,0.0);
 
 	    // camera
@@ -177,7 +177,7 @@
 	    for( int j=0; j<AA; j++ )
 	    for( int i=0; i<AA; i++ )
 	    {
-	        vec2 p = (-iResolution.xy + 2.0*(fragCoord + vec2(float(i),float(j))/float(AA))) / iResolution.y;
+	        vec2 p = (-resolution.xy + 2.0*(gl_FragCoord.xy + vec2(float(i),float(j))/float(AA))) / resolution.y;
 
 	        vec3 cw = normalize(ta-ro);
 	        vec3 cp = vec3(sin(cr), cos(cr),0.0);
@@ -189,7 +189,7 @@
 	    }
 	    col /= float(AA*AA);
 
-	    vec2 uv = fragCoord.xy / iResolution.xy;
+	    vec2 uv = gl_FragCoord.xy / resolution.xy;
 		col *= 0.7 + 0.3*pow(16.0*uv.x*uv.y*(1.0-uv.x)*(1.0-uv.y),0.25);
 
 		FRAG_COLOR = vec4( col, 1.0 );
