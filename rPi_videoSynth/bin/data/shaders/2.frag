@@ -1,5 +1,4 @@
 #pragma include "headerFrag.glsl"
-#define AA 1
 
 	uniform sampler2D tex;
 
