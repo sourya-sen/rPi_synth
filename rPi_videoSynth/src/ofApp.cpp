@@ -3,6 +3,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
+    ofSetFrameRate(25);
+    
     ofDisableArbTex();
     
     receiver.setup(PORT);
@@ -160,6 +162,8 @@ void ofApp::mouseExited(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
+    
+    mainImage.allocate(ofGetWidth(), ofGetHeight());
     
 }
 

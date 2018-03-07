@@ -14,34 +14,96 @@
 	uniform int subSystem;
 	uniform vec2 resolution;
 
+	/*
+	 A noise function mirrored and thresholded to maximize the value at the center of the screen
+	 Combined with a second layer of noise to produce an ink on paper effect
+	*/
+
+	const vec3 inkColor = vec3(1.0, 0.98, 0.94);
+	const vec3 paperColor = vec3(0.1, 0.1, 0.1);
+
+	const float speed = 0.0075;
+	const float shadeContrast = 0.55;
+
+	//3D simplex noise from: https://www.shadertoy.com/view/XsX3zB
+	const float F3 =  0.3333333;
+	const float G3 =  0.1666667;
+
+	vec3 random3(vec3 c) {
+	    float j = 4096.0*sin(dot(c,vec3(17.0, 59.4, 15.0)));
+	    vec3 r;
+	    r.z = fract(512.0*j);
+	    j *= .125;
+	    r.x = fract(512.0*j);
+	    j *= .125;
+	    r.y = fract(512.0*j);
+	    return r-0.5;
+	}
+
+	float simplex3d(vec3 p) {
+		 vec3 s = floor(p + dot(p, vec3(F3)));
+		 vec3 x = p - s + dot(s, vec3(G3));
+
+		 vec3 e = step(vec3(0.0), x - x.yzx);
+		 vec3 i1 = e*(1.0 - e.zxy);
+		 vec3 i2 = 1.0 - e.zxy*(1.0 - e);
+
+		 vec3 x1 = x - i1 + G3;
+		 vec3 x2 = x - i2 + 2.0*G3;
+		 vec3 x3 = x - 1.0 + 3.0*G3;
+
+		 vec4 w, d;
+
+		 w.x = dot(x, x);
+		 w.y = dot(x1, x1);
+		 w.z = dot(x2, x2);
+		 w.w = dot(x3, x3);
+
+		 w = max(0.6 - w, 0.0);
+
+		 d.x = dot(random3(s), x);
+		 d.y = dot(random3(s + i1), x1);
+		 d.z = dot(random3(s + i2), x2);
+		 d.w = dot(random3(s + 1.0), x3);
+
+		 w *= w;
+		 w *= w;
+		 d *= w;
+
+		 return dot(d, vec4(52.0));
+	}
+
+	float fbm(vec3 p)
+	{
+		float f = 0.0;
+		float frequency = 1.0;
+		float amplitude = 0.5;
+		for (int i = 0; i < 5; i++)
+		{
+			f += simplex3d(p * frequency) * amplitude;
+			amplitude *= 0.5;
+			frequency *= 2.0 + float(i) / 100.0;
+		}
+		return min(f, 1.0);
+	}
+
 	void main()
 	{
-		const float pi = 3.14;
-    float size = resolution.y / 10.0; // cell size in pixel
+	    //Setup coordinates
+	    vec2 uv = 1.0 - gl_FragCoord.xy / resolution.xy;
+	    vec2 coord = 1.0 - uv * 2.0;
+	    uv.x = 1.0 - abs(1.0 - uv.x * 2.0);
+	    vec3 p = vec3(uv, time * speed);
 
-    vec2 p1 = gl_FragCoord.xy / size; // normalized pos
-    vec2 p2 = fract(p1) - 0.5; // relative pos from cell center
+	    //Sample a noise function
+	    float blot = fbm(p * 3.0 + 8.0);
+	    float shade = fbm(p * 2.0 + 16.0);
 
-    // random number
-    float rnd = dot(floor(p1), vec2(12.9898, 78.233));
-    rnd = fract(sin(rnd) * 43758.5453);
+	    //Threshold
+	    blot = (blot + (sqrt(uv.x) - abs(0.5 - uv.y)));
+	    blot = smoothstep(0.65, 0.71, blot) * max(1.0 - shade * shadeContrast, 0.0);
 
-    // rotation matrix
-    float phi = rnd * pi * 2.0 + time * 0.4;
-    mat2x2 rot = mat2x2(cos(phi), -sin(phi), sin(phi), cos(phi));
-
-    vec2 p3 = rot * p2; // apply rotation
-    p3.y += sin(p3.x * 5.0 + time * 2.0) * 0.12; // wave
-
-    float rep = fract(rnd * 13.285) * 8.0 + 2; // line repetition
-    float gr = fract(p3.y * rep + time * 0.8); // repeating gradient
-
-    // make antialiased line by saturating the gradient
-    float c = clamp((0.25 - abs(0.5 - gr)) * size * 0.75 / rep, 0.0, 1.0);
-    c *= max(0.0, 1.0 - length(p2) * 0.6); // darken corners
-
-    vec2 bd = (0.5 - abs(p2)) * size - 2.0; // border lines
-    c *= clamp(min(bd.x, bd.y), 0.0, 1.0);
-
-    FRAG_COLOR = vec4(c);
+	    //Color
+	    FRAG_COLOR = vec4(mix(paperColor, inkColor, blot), 1.0);
+	    FRAG_COLOR.rgb *= 1.0 - pow(max(length(coord) - 0.5, 0.0), 5.0);
 	}
