@@ -26,13 +26,13 @@ void ofApp::setup(){
         shaders[i].load("shaders/standard.vert", path + fileName);
     }
     
-    mainImage.allocate(1024, 768);
+    mainImage.allocate(1024, 768, GL_RGB);
     
     debugMode = false;
     
     ofSetBackgroundColor(0);
     
-//    ofSetFullscreen(true);
+    ofSetFullscreen(true);
     
 }
 
