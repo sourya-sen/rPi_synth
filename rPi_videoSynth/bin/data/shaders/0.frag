@@ -26,8 +26,8 @@
 	const float shadeContrast = 0.55;
 
 	//3D simplex noise from: https://www.shadertoy.com/view/XsX3zB
-	const float F3 =  0.3333333;
-	const float G3 =  0.1666667;
+	const float F3 =  0.33;
+	const float G3 =  0.16;
 
 	vec3 random3(vec3 c) {
 	    float j = 4096.0*sin(dot(c,vec3(17.0, 59.4, 15.0)));
