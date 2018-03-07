@@ -17,7 +17,7 @@ int main( ){
     settings.width = 1024;
     settings.height = 768;
    
-    settings.windowMode = OF_WINDOW;
+//    settings.windowMode = OF_WINDOW;
     ofCreateWindow(settings);
     
     // this kicks off the running of my app
