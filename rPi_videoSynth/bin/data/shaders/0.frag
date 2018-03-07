@@ -23,75 +23,39 @@
 	// }
 
 
-  //Noise animation - Flow
-  //by nimitz (stormoid.com) (twitter: @stormoid)
-
-
-  //Somewhat inspired by the concepts behind "flow noise"
-  //every octave of noise is modulated separately
-  //with displacement using a rotated vector field
-
-  //normalization is used to created "swirls"
-  //usually not a good idea, depending on the type of noise
-  //you are going for.
-
-  //Sinus ridged fbm is used for better effect.
-
-  #define time time*0.1
-  #define tau 6.2831853
-
-  mat2 makem2(in float theta){float c = cos(theta);float s = sin(theta);return mat2(c,-s,s,c);}
-  float noise( in vec2 x ){return dot(x, vec2(CV0, CV1));}
-  mat2 m2 = mat2( 0.80,  0.60, -0.60,  0.80 );
-
-  float grid(vec2 p)
-  {
-  	float s = sin(p.x)*cos(p.y);
-  	return s;
+  vec2 random2(vec2 st){
+      st = vec2( dot(st,vec2(127.1,311.7)),
+                dot(st,vec2(269.5,183.3)) );
+      return -1.0 + 2.0*fract(sin(st)*43758.5453123);
   }
 
-  float flow(in vec2 p)
-  {
-  	float z=2.;
-  	float rz = 0.;
-  	vec2 bp = p;
-  	for (float i= 1.;i < 7.;i++ )
-  	{
-  		bp += time*1.5;
-  		vec2 gr = vec2(grid(p*3.-time*2.),grid(p*3.+4.-time*2.))*0.4;
-  		gr = normalize(gr)*0.4;
-  		gr *= makem2((p.x+p.y)*.3+time*10.);
-  		p += gr*0.5;
+  // Value Noise by Inigo Quilez - iq/2013
+  // https://www.shadertoy.com/view/lsf3WH
+  float noise(vec2 st) {
+      vec2 i = floor(st);
+      vec2 f = fract(st);
 
-  		rz+= (sin(noise(p)*8.)*0.5+0.5) /z;
+      vec2 u = f*f*(3.0-2.0*f);
 
-  		p = mix(bp,p,.5);
-  		z *= 1.7;
-  		p *= 2.5;
-  		p*=m2;
-  		bp *= 2.5;
-  		bp*=m2;
-  	}
-  	return rz;
+      return mix( mix( dot( random2(i + vec2(0.0,0.0) ), f - vec2(0.0,0.0) ),
+                       dot( random2(i + vec2(1.0,0.0) ), f - vec2(1.0,0.0) ), u.x),
+                  mix( dot( random2(i + vec2(0.0,1.0) ), f - vec2(0.0,1.0) ),
+                       dot( random2(i + vec2(1.0,1.0) ), f - vec2(1.0,1.0) ), u.x), u.y);
   }
 
-  float spiral(vec2 p,float scl)
-  {
-  	float r = length(p);
-  	r = log(r);
-  	float a = atan(p.y, p.x);
-  	return abs(mod(scl*(r-2./scl*a),tau)-1.)*2.;
-  }
+  void main() {
+      vec2 st = gl_FragCoord.xy/resolution.xy;
+      st.x *= resolution.x/resolution.y;
+      vec3 color = vec3(0.0);
 
-  void main()
-  {
-  	vec2 p = gl_FragCoord.xy / resolution.xy-0.5;
-  	p.x *= resolution.x/resolution.y;
-  	p*= 3.;
-  	float rz = flow(p);
-  	p /= exp(mod(time*3.,2.1));
-  	rz *= (6.-spiral(p,3.))*.9;
-  	vec3 col = vec3(.2,0.07,0.01)/rz;
-  	col=pow(abs(col),vec3(1.01));
-  	FRAG_COLOR = vec4(col,1.0);
+      float t = 1.0;
+      // Uncomment to animate
+      t = abs(1.0-sin(time*.1))*5.;
+      // Comment and uncomment the following lines:
+      st += noise(st*2.)*t; // Animate the coordinate space
+      color = vec3(1.) * smoothstep(.18,.2,noise(st)); // Big black drops
+      color += smoothstep(.15,.2,noise(st*10.)); // Black splatter
+      color -= smoothstep(.35,.4,noise(st*10.)); // Holes on splatter
+
+      FRAG_COLOR = vec4(1.-color,1.0);
   }
