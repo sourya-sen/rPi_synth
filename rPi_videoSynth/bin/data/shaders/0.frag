@@ -19,15 +19,15 @@
 	 Combined with a second layer of noise to produce an ink on paper effect
 	*/
 
-	const vec3 inkColor = vec3(1.0, 0.98, 0.94);
+	const vec3 inkColor = vec3(1.0, 1.0, 1.0);
 	const vec3 paperColor = vec3(0.0, 0.0, 0.0);
 
 	const float speed = 0.0075;
 	const float shadeContrast = 0.55;
 
 	//3D simplex noise from: https://www.shadertoy.com/view/XsX3zB
-	const float F3 =  0.33;
-	const float G3 =  0.16;
+	const float F3 =  0.3333333;
+	const float G3 =  0.1666667;
 
 	vec3 random3(vec3 c) {
 	    float j = 4096.0*sin(dot(c,vec3(17.0, 59.4, 15.0)));
@@ -105,5 +105,5 @@
 
 	    //Color
 	    FRAG_COLOR = vec4(mix(paperColor, inkColor, blot), 1.0);
-	    FRAG_COLOR.rgb *= 1.0 - pow(max(length(coord) - 0.5, 0.0), 5.0);
+	    // FRAG_COLOR.rgb *= 1.0 - pow(max(length(coord) - 0.5, 0.0), 5.0);
 	}

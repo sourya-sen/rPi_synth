@@ -5,9 +5,13 @@ int main( ){
 #ifdef TARGET_OPENGLES
     ofGLESWindowSettings settings;
     settings.glesVersion = 2;
+    settings.windowMode = OF_FULLSCREEN;
+
 #else
     ofGLWindowSettings settings;
     settings.setGLVersion(3,3);
+    settings.windowMode = OF_WINDOW;
+
 #endif
     
     settings.width = 1024;
