@@ -125,7 +125,7 @@ void ofApp::runSystem(int _sys){
     
     shaders[system].begin();
     sendUniforms(system);
-    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+    ofDrawRectangle(0, 0, 1024, 768);
     shaders[system].end();
     
     
