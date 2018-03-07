@@ -26,9 +26,13 @@ void ofApp::setup(){
         shaders[i].load("shaders/standard.vert", path + fileName);
     }
     
-    mainImage.allocate(ofGetWidth(), ofGetHeight());
+    mainImage.allocate(1024, 768);
     
     debugMode = false;
+    
+    ofSetBackgroundColor(0);
+    
+//    ofSetFullscreen(true);
     
 }
 
@@ -65,8 +69,7 @@ void ofApp::update(){
     //----------> MAIN FBO CALL.
     
     mainImage.begin();
-    ofSetColor(0);
-    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+    ofClear(0);
     runSystem(system);
     
     mainImage.end();
@@ -79,7 +82,18 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     
-    mainImage.draw(0, 0);
+    float x = 0;
+    float y = 0;
+    
+    if(ofGetWidth() != 1024){
+        x = (ofGetWidth() - 1024)/2.0;
+    }
+    
+    if(ofGetHeight() != 768){
+        y = (ofGetHeight() - 768)/2.0;
+    }
+    
+    mainImage.draw(x, y);
     
     if(debugMode){
         ofDrawBitmapStringHighlight("System: " + ofToString(system), 10, 15);
@@ -103,7 +117,7 @@ void ofApp::sendUniforms(int selectedShader){
     shaders[selectedShader].setUniform1f("CV3", CV[3]);
     shaders[selectedShader].setUniform1f("time", ofGetElapsedTimef());
     shaders[selectedShader].setUniform1i("subSystem", subSystem);
-    shaders[selectedShader].setUniform2f("resolution", ofVec2f(ofGetWidth(), ofGetHeight()));
+    shaders[selectedShader].setUniform2f("resolution", ofVec2f(1024, 768));
     
 }
 //--------------------------------------------------------------
@@ -163,7 +177,7 @@ void ofApp::mouseExited(int x, int y){
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
     
-    mainImage.allocate(ofGetWidth(), ofGetHeight());
+//    mainImage.allocate(ofGetWidth(), ofGetHeight());
     
 }
 

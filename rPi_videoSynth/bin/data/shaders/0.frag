@@ -20,7 +20,7 @@
 	*/
 
 	const vec3 inkColor = vec3(1.0, 0.98, 0.94);
-	const vec3 paperColor = vec3(0.1, 0.1, 0.1);
+	const vec3 paperColor = vec3(0.0, 0.0, 0.0);
 
 	const float speed = 0.0075;
 	const float shadeContrast = 0.55;
