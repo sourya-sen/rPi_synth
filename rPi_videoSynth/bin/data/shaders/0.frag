@@ -14,45 +14,50 @@
 	uniform int subSystem;
 	uniform vec2 resolution;
 
-	// void main()
-	// {
-	// 	float r = gl_gl_FragCoord.x/resolution.x;
-	// 	float g = gl_gl_FragCoord.y/resolution.y;
-  //
-	// 	FRAG_COLOR = vec4(r, g, CV0, 1.0);
-	// }
-
-
-	vec3 fade(vec3 x) { return x * x * x * (x * (x * 6. - 15.) + 10.); }
-
-	vec3 phash(vec3 p)
-	{
-	    p = fract(mat3(1.2989833, 7.8233198, 2.3562332,
-	                   6.7598192, 3.4857334, 8.2837193,
-	                   2.9175399, 2.9884245, 5.4987265) * p);
-	    p = ((2384.2345 * p - 1324.3438) * p + 3884.2243) * p - 4921.2354;
-	    return normalize(fract(p) * 2. - 1.);
+	float random (in vec2 st) {
+	    return fract(sin(dot(st.xy,
+	                         vec2(12.9898,78.233)))
+	                * 43758.5453123);
 	}
 
-	float noise(vec3 p)
-	{
-	    vec3 ip = floor(p);
-	    vec3 fp = fract(p);
-	    float d000 = dot(phash(ip), fp) * CV0;
-	    float d001 = dot(phash(ip + vec3(0., 0., 1.)), fp - vec3(0., 0., 1.));
-	    float d010 = dot(phash(ip + vec3(0., 1., 0.)), fp - vec3(0., 1., 0.));
-	    float d011 = dot(phash(ip + vec3(0., 1., 1.)), fp - vec3(0., 1., 1.));
-	    float d100 = dot(phash(ip + vec3(1., 0., 0.)), fp - vec3(1., 0., 0.));
-	    float d101 = dot(phash(ip + vec3(1., 0., 1.)), fp - vec3(1., 0., 1.));
-	    float d110 = dot(phash(ip + vec3(1., 1., 0.)), fp - vec3(1., 1., 0.));
-	    float d111 = dot(phash(ip + vec3(1., 1., 1.)), fp - vec3(1., 1., 1.));
-	    fp = fade(fp);
-	    return mix(mix(mix(d000, d001, fp.z), mix(d010, d011, fp.z), fp.y),
-	               mix(mix(d100, d101, fp.z), mix(d110, d111, fp.z), fp.y), fp.x);
+	// Value noise by Inigo Quilez - iq/2013
+	// https://www.shadertoy.com/view/lsf3WH
+	float noise(vec2 st) {
+	    vec2 i = floor(st);
+	    vec2 f = fract(st);
+	    vec2 u = f*f*(3.0-2.0*f);
+	    return mix( mix( random( i + vec2(0.0,0.0) ),
+	                     random( i + vec2(1.0,0.0) ), u.x),
+	                mix( random( i + vec2(0.0,1.0) ),
+	                     random( i + vec2(1.0,1.0) ), u.x), u.y);
 	}
 
-	void main(void)
-	{
-	    vec3 p = vec3(gl_FragCoord.xy * (10. * CV0 + .3) / resolution.y, time * CV1);
-	    FRAG_COLOR = vec4(noise(p) / 2. + 0.1 + CV2 + CV3/2.);
+	mat2 rotate2d(float angle){
+	    return mat2(cos(angle),-sin(angle),
+	                sin(angle),cos(angle));
+	}
+
+	float lines(in vec2 pos, float b){
+	    float scale = 15.0;
+	    pos *= scale;
+	    return smoothstep(0.0,
+	                    .5+b*.5,
+	                    abs((sin(pos.x*3.1415)+b*2.0))*.5);
+	}
+
+	void main() {
+	    vec2 st = gl_FragCoord.xy/resolution.xy;
+	    st.y *= resolution.y/resolution.x;
+
+	    vec2 pos = st.yx*vec2(sin(time) * .1 , 3.);
+
+	    float pattern = pos.x;
+
+	    // Add noise
+	    pos = rotate2d( noise(pos + sin(time/10.)) ) * pos * noise(vec2(time/100.));
+
+	    // Draw lines
+	    pattern = lines(pos, abs(sin(time/10.0)));
+
+	    FRAG_COLOR = vec4(vec3(pattern, pattern * .1, pattern * .3),1.0);
 	}
