@@ -14,13 +14,15 @@
 	uniform int subSystem;
 	uniform vec2 resolution;
 
+	//original code from http://glslsandbox.com/e#45360.0
+
 	void main()
 	{
 	    vec2 r = resolution,
 	    o = gl_FragCoord.xy - r/2.;
-	    o = vec2(length(o) / r.y - .3, atan(o.y,o.x));
+	    o = vec2(length(o) / r.y - (.1 + .3 * CV3), atan(o.y,o.x));
 	    vec4 s = 0.07*cos(1.5*vec4(0,1,2,3) + time + o.y + cos(o.y) * cos(time)),
 	    e = s.yzwx,
 	    f = max(o.x-s,e-o.x);
-	    gl_FragColor = dot(clamp(f*r.y,0.,1.), 72.*(s-e)) * (s-.1) + f;
+	    FRAG_COLOR = dot(clamp(f*r.y,0.,(1. + 2.0 * CV2)), (50.0 + 50.0 * CV1)*(s-e)) * (s-(.1 * CV0));
 	}
