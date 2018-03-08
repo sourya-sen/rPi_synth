@@ -54,5 +54,5 @@
 	void main(void)
 	{
 	    vec3 p = vec3(gl_FragCoord.xy * 10. / resolution.y, time);
-	    fragColor = vec4(noise(p) / 2. + 0.5);
+	    FRAG_COLOR = vec4(noise(p) / 2. + 0.5);
 	}
