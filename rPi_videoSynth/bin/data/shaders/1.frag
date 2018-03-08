@@ -16,8 +16,8 @@
 
 	void main()
 	{
-		float r = gl_FragCoord.x/resolution.x;
-		float g = gl_FragCoord.y/resolution.y;
+		float r = gl_FragCoord.x/1024.0;
+		float g = gl_FragCoord.y/768.0;
 
 		FRAG_COLOR = vec4(r, g, CV0, 1.0);
 	}

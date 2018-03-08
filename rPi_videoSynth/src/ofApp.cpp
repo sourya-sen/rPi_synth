@@ -26,6 +26,10 @@ void ofApp::setup(){
         shaders[i].load("shaders/standard.vert", path + fileName);
     }
     
+    for(int i = 0; i<shaders.size(); i++){
+		cout << shaders[i].isLoaded() << endl;
+	}
+    
     mainImage.allocate(1024, 768, GL_RGB);
     
     debugMode = false;
@@ -94,6 +98,7 @@ void ofApp::draw(){
     }
     
     mainImage.draw(x, y);
+
     
     if(debugMode){
         ofDrawBitmapStringHighlight("System: " + ofToString(system), 10, 15);
@@ -103,6 +108,8 @@ void ofApp::draw(){
         
         ofDrawBitmapStringHighlight("Running at: " + ofToString(ofGetWidth()) + " by " + ofToString(ofGetHeight()) + " at " + ofToString(ofGetFrameRate())
                                     , 10, ofGetHeight() - 30);
+                                    
+        ofDrawBitmapStringHighlight("System set is: " + ofToString(system), 10, ofGetHeight() - 15);
         
     }
     
@@ -123,10 +130,10 @@ void ofApp::sendUniforms(int selectedShader){
 //--------------------------------------------------------------
 void ofApp::runSystem(int _sys){
     
-    shaders[system].begin();
-    sendUniforms(system);
-    ofDrawRectangle(0, 0, 1024, 768);
-    shaders[system].end();
+    shaders[_sys].begin();
+    sendUniforms(_sys);
+    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+    shaders[_sys].end();
     
     
 }
