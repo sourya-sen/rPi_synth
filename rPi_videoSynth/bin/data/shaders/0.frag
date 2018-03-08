@@ -54,10 +54,10 @@
 	    float pattern = pos.x;
 
 	    // Add noise
-	    pos = rotate2d( noise(pos + sin(time/10.)) ) * pos * noise(vec2(time/100.));
+	    pos = rotate2d(noise(pos + sin(time/10.))) * pos * noise(vec2(time/100.) * 10. * CV0);
 
 	    // Draw lines
 	    pattern = lines(pos, abs(sin(time/10.0)));
 
-	    FRAG_COLOR = vec4(vec3(pattern, pattern * .1, pattern * .3),1.0);
+	    FRAG_COLOR = vec4(vec3(pattern, pattern * CV1, pattern * CV2), CV3);
 	}
