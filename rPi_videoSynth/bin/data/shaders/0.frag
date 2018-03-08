@@ -38,7 +38,7 @@
 	{
 	    vec3 ip = floor(p);
 	    vec3 fp = fract(p);
-	    float d000 = dot(phash(ip), fp);
+	    float d000 = dot(phash(ip), fp) * CV0;
 	    float d001 = dot(phash(ip + vec3(0., 0., 1.)), fp - vec3(0., 0., 1.));
 	    float d010 = dot(phash(ip + vec3(0., 1., 0.)), fp - vec3(0., 1., 0.));
 	    float d011 = dot(phash(ip + vec3(0., 1., 1.)), fp - vec3(0., 1., 1.));
@@ -53,6 +53,6 @@
 
 	void main(void)
 	{
-	    vec3 p = vec3(gl_FragCoord.xy * 10. / resolution.y, time);
-	    FRAG_COLOR = vec4(noise(p) / 2. + 0.5);
+	    vec3 p = vec3(gl_FragCoord.xy * (10. * CV0 + .3) / resolution.y, time * CV1);
+	    FRAG_COLOR = vec4(noise(p) / 2. + 0.1 + CV2 + CV3/2.);
 	}
