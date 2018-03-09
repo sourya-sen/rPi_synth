@@ -34,6 +34,7 @@ class ofApp : public ofBaseApp{
     vector<float> CV;
     
     bool debugMode;
+    bool keyboardMode;
     
     vector<ofShader> shaders;
     ofFbo mainImage;

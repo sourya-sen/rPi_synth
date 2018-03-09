@@ -14,10 +14,14 @@
 	uniform int subSystem;
 	uniform vec2 resolution;
 
-	void main()
-	{
-		float r = gl_FragCoord.x/resolution.x;
-		float g = gl_FragCoord.y/resolution.y;
+	void main( void ) {
 
-		FRAG_COLOR = vec4(r, g, CV0, 1.0);
+		vec2 position = ( gl_FragCoord.xy / resolution.xy );
+
+		float color = 0.0;
+		color  = sin( position.x * 8.0 + sin( position.y * 4.0 + time * 3.0 + 3.14 ) );
+		color *= sin( position.y * 7.0 + sin( position.x * 9.0 + time * 2.0 ) );
+
+		FRAG_COLOR = vec4(color,color,color,1.0);
+
 	}

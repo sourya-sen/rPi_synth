@@ -26,13 +26,10 @@ void ofApp::setup(){
         shaders[i].load("shaders/standard.vert", path + fileName);
     }
     
-    for(int i = 0; i<shaders.size(); i++){
-		cout << shaders[i].isLoaded() << endl;
-	}
-    
     mainImage.allocate(1024, 768, GL_RGB);
     
     debugMode = false;
+    keyboardMode = true;
     
     ofSetBackgroundColor(0);
     
@@ -49,7 +46,7 @@ void ofApp::update(){
         receiver.getNextMessage(m);
         
         if(m.getAddress() == "/sys"){
-            system = m.getArgAsInt(0);
+            if(!keyboardMode) system = m.getArgAsInt(0);
         } else if (m.getAddress() == "/subSys") {
             subSystem = m.getArgAsInt(0);
         } else if (m.getAddress() == "/fx0"){
@@ -148,6 +145,30 @@ void ofApp::keyReleased(int key){
     
     if(key == ' '){
         debugMode = !debugMode;
+    }
+    
+    if(keyboardMode){
+        switch(key){
+            case '0':
+                system = 0;
+                break;
+            case '1':
+                system = 1;
+                break;
+            case '2':
+                system = 2;
+                break;
+            case '3':
+                system = 3;
+                break;
+            case '4':
+                system = 4;
+                break;
+            case '5':
+                system = 5;
+                break;
+                
+        }
     }
 }
 

@@ -14,39 +14,28 @@
 	uniform int subSystem;
 	uniform vec2 resolution;
 
-	vec2 random2(vec2 st){
-			st = vec2( dot(st,vec2(127.1,311.7)),
-								dot(st,vec2(269.5,183.3)) );
-			return -1.0 + 2.0*fract(sin(st)*43.54);
+	float getColor(float d, float rad, float t, float offset) {
+
+	float v = 0.0;
+	for(int i = 1; i < 10; i++) {
+		v += (sin(rad * float(i) + t / pow(float(i), 2.0) + float(i) + offset) * 0.5 + 0.5) * pow(0.5, float(i));
 	}
+	v = 1.0 - smoothstep(v, v + 0.27, d);
+	return v;
+}
 
-	// Value Noise by Inigo Quilez - iq/2013
-	// https://www.shadertoy.com/view/lsf3WH
-	float noise(vec2 st) {
-			vec2 i = floor(st);
-			vec2 f = fract(st);
+void main( void ) {
 
-			vec2 u = f*f*(3.0-2.0*f);
+	vec2 st = gl_FragCoord.xy / min(resolution.x, resolution.y) * 2.0 - resolution.xy / min(resolution.x, resolution.y);
 
-			return mix( mix( dot( random2(i + vec2(0.0,0.0) ), f - vec2(0.0,0.0) ),
-											 dot( random2(i + vec2(1.0,0.0) ), f - vec2(1.0,0.0) ), u.x),
-									mix( dot( random2(i + vec2(0.0,1.0) ), f - vec2(0.0,1.0) ),
-											 dot( random2(i + vec2(1.0,1.0) ), f - vec2(1.0,1.0) ), u.x), u.y);
-	}
+	float d = length(st);
+	float rad = atan(st.y, st.x);
+	float t = time * 3.0;
 
-	void main() {
-			vec2 st = gl_FragCoord.xy/resolution.xy;
-			st.x *= resolution.x/resolution.y;
-			vec3 color = vec3(0.0);
+	float r = getColor(d, rad, t, -0.125);
+	float g = getColor(d, rad, t,  0.27);
+	float b = getColor(d, rad, t,  0.54);
 
-			float t = 1.0;
-			// Uncomment to animate
-			t = abs(1.0-sin(time*.1))*5.;
-			// Comment and uncomment the following lines:
-			st += noise(st*2.)*t; // Animate the coordinate space
-			color = vec3(1.) * smoothstep(.18,.2,noise(st)); // Big black drops
-			color += smoothstep(.15,.2,noise(st*10.)); // Black splatter
-			color -= smoothstep(.35,.4,noise(st*10.)); // Holes on splatter
+	FRAG_COLOR = vec4(r, g,  b, 1.0);
 
-			FRAG_COLOR = vec4(1.-color,1.0);
-	}
+}
