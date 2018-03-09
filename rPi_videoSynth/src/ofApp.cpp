@@ -21,7 +21,7 @@ void ofApp::setup(){
     shaders.resize(8);
     loadShaders();
     
-    mainImage.allocate(ofGetWidth(), ofGetHeight(), GL_RGB);
+    mainImage.allocate(1024, 768, GL_RGB);
     
     debugMode = false;
     keyboardMode = true;
@@ -82,18 +82,18 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     
-//    float x = 0;
-//    float y = 0;
-//
-//    if(ofGetWidth() != 1024){
-//        x = (ofGetWidth() - 1024)/2.0;
-//    }
-//
-//    if(ofGetHeight() != 768){
-//        y = (ofGetHeight() - 768)/2.0;
-//    }
+    float x = 0;
+    float y = 0;
     
-    mainImage.draw(0, 0);
+    if(ofGetWidth() != 1024){
+        x = (ofGetWidth() - 1024)/2.0;
+    }
+    
+    if(ofGetHeight() != 768){
+        y = (ofGetHeight() - 768)/2.0;
+    }
+    
+    mainImage.draw(x, y);
 
     
     if(debugMode){
@@ -120,7 +120,7 @@ void ofApp::sendUniforms(int selectedShader){
     shaders[selectedShader].setUniform1f("CV3", CV[3]);
     shaders[selectedShader].setUniform1f("time", ofGetElapsedTimef());
     shaders[selectedShader].setUniform1i("subSystem", subSystem);
-    shaders[selectedShader].setUniform2f("resolution", ofVec2f(ofGetWidth(), ofGetHeight()));
+    shaders[selectedShader].setUniform2f("resolution", ofVec2f(1024, 768));
     
 }
 //--------------------------------------------------------------
