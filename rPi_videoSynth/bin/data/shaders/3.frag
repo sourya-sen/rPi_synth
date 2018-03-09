@@ -30,7 +30,7 @@ void main( void ) {
 
 	float d = length(st);
 	float rad = atan(st.y, st.x);
-	float t = time * 3.0;
+	float t = time * max(1.0, 5.0 * CV0);
 
 	float r = getColor(d, rad, t, -0.125);
 	float g = getColor(d, rad, t,  0.27);
