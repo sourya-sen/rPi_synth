@@ -27,6 +27,8 @@ class ofApp : public ofBaseApp{
     void sendUniforms(int selectedShader);
     void runSystem(int _sys);
     
+    void loadShaders();
+    
     ofxOscReceiver receiver;
     
     int system, subSystem;

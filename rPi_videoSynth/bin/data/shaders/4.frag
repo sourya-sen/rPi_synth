@@ -33,7 +33,7 @@
 	    col += ball(p, 1.5, 0.5, 0.6, 0.7);
 	    col += ball(p, 0.1, .5, 0.6, 0.7);
 
-	    col = max(mod(col, 0.4), min(col, 2.0));
+	    col = max(mod(col, 0.4), min(col, max(0.8, 4.0 * CV0)));
 
-	    FRAG_COLOR = vec4(col * 0.8, col * 0.3, col * 0.3, 1.0);
+	    FRAG_COLOR = vec4(col * CV1, col * (0.5 + CV2), col * (0.5 + CV3), 1.0);
 	}

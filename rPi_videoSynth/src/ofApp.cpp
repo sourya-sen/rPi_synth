@@ -19,12 +19,7 @@ void ofApp::setup(){
     
     //...load all the shaders here.
     shaders.resize(8);
-    
-    for(int i = 0; i<shaders.size(); i++){
-        string path = "shaders/";
-        string fileName = ofToString(i) + ".frag";
-        shaders[i].load("shaders/standard.vert", path + fileName);
-    }
+    loadShaders();
     
     mainImage.allocate(1024, 768, GL_RGB);
     
@@ -34,6 +29,10 @@ void ofApp::setup(){
     ofSetBackgroundColor(0);
     
     ofSetFullscreen(true);
+    
+#ifdef TARGET_OPENGLES
+    ofHideCursor();
+#endif
     
 }
 
@@ -135,6 +134,15 @@ void ofApp::runSystem(int _sys){
     
 }
 //--------------------------------------------------------------
+void ofApp::loadShaders(){
+    for(int i = 0; i<shaders.size(); i++){
+        string path = "shaders/";
+        string fileName = ofToString(i) + ".frag";
+        shaders[i].load("shaders/standard.vert", path + fileName);
+    }
+}
+
+//--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
     
@@ -169,6 +177,10 @@ void ofApp::keyReleased(int key){
                 break;
                 
         }
+    }
+    
+    if((key == 'r') || (key == 'R')){
+        loadShaders();
     }
 }
 
