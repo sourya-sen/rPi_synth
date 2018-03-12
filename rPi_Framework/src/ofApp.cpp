@@ -123,12 +123,13 @@ void ofApp::update(){
   fx2.setAddress("/fx2");
   fx2.addBoolArg(o_fx2);
   sender.sendMessage(fx2, false);
-    
-    if(ofGetTimeElapsedf()%100 == 0){
+/*    
+    if(ofGetElapsedTimeMillis()%1000 == 0){
         cout << "system: " << system << endl;
-        cout << "subsytem" << subsytem << endl;
+        cout << "subsytem" << subSystem << endl;
         cout << "FX: " << fx0 << " " << fx1 << " " << fx2 << endl;
     }
+*/
 
 }
 
