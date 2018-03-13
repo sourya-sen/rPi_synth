@@ -53,12 +53,13 @@ void ofApp::update(){
 
   for(int i = 0; i< mux.size(); i++){
 
-	gpio14.setval_gpio(ofToString(r0[i]));
-	gpio15.setval_gpio(ofToString(r1[i]));
-	gpio18.setval_gpio(ofToString(r2[i]));
+  	gpio14.setval_gpio(ofToString(r0[i]));
+  	gpio15.setval_gpio(ofToString(r1[i]));
+  	gpio18.setval_gpio(ofToString(r2[i]));
 
-	gpio17.getval_gpio(mux[i]);
-	usleep(100);
+  	gpio17.getval_gpio(mux[i]);
+  	usleep(100);
+
 	}
 
   o_system = ofBinaryToInt(ofToString(100 * ofToInt(mux[0]) + 10 * ofToInt(mux[1]) + ofToInt(mux[2])));
@@ -134,6 +135,8 @@ void ofApp::update(){
         cout << "FX: " << fx0 << " " << fx1 << " " << fx2 << endl;
     }
 */
+
+  usleep(100);
 
 }
 
