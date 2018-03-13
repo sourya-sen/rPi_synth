@@ -35,7 +35,7 @@ class ofApp : public ofBaseApp{
 		vector<string> mux;
 
 		//these will be sent over OSC
-		int o_system;
+		int o_system, lastSystem;
 		int o_subSystem;
 		bool o_fx0, o_fx1, o_fx2;
 		vector<float> o_cv;

@@ -44,7 +44,7 @@ void ofApp::update(){
 	     } else {
 	        analogIn[i] = a2d.getValueAllChannel(chip)[i];
 	       }
-      usleep(10);
+      usleep(100);
     }
 
   int r0 [] = {0, 1, 0, 1, 0, 1, 0, 1};
@@ -58,7 +58,7 @@ void ofApp::update(){
 	gpio18.setval_gpio(ofToString(r2[i]));
 
 	gpio17.getval_gpio(mux[i]);
-	usleep(10);
+	usleep(100);
 	}
 
   o_system = ofBinaryToInt(ofToString(100 * ofToInt(mux[0]) + 10 * ofToInt(mux[1]) + ofToInt(mux[2])));
@@ -92,10 +92,14 @@ void ofApp::update(){
   //Let's send everything over OSC :)
   //TODO: SEND ONLY IF THEY'RE NEW VALUES -> Add checks!
 
-  ofxOscMessage system;
-  system.setAddress("/sys");
-  system.addIntArg(o_system);
-  sender.sendMessage(system, false);
+  if(lastSystem != o_system){
+    ofxOscMessage system;
+    system.setAddress("/sys");
+    system.addIntArg(o_system);
+    sender.sendMessage(system, false);
+
+    lastSystem = o_system;
+  }
 
   ofxOscMessage subSystem;
   subSystem.setAddress("/subSys");
@@ -123,7 +127,7 @@ void ofApp::update(){
   fx2.setAddress("/fx2");
   fx2.addBoolArg(o_fx2);
   sender.sendMessage(fx2, false);
-/*    
+/*
     if(ofGetElapsedTimeMillis()%1000 == 0){
         cout << "system: " << system << endl;
         cout << "subsytem" << subSystem << endl;
