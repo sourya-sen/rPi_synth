@@ -53,6 +53,7 @@ void ofApp::update(){
   int r2 [] = {0, 0, 0, 0, 1, 1, 1, 1};
 
   for(int i = 0; i< mux.size(); i++){
+    updateOutputs = false;
 
   	gpio14.setval_gpio(ofToString(r0[i]));
   	gpio15.setval_gpio(ofToString(r1[i]));
@@ -61,10 +62,13 @@ void ofApp::update(){
   	gpio17.getval_gpio(mux[i]);
   	usleep(100);
 
+    if(i == 7) updateOutputs = true;
 	}
 
-  o_system = ofBinaryToInt(ofToString(100 * ofToInt(mux[0]) + 10 * ofToInt(mux[1]) + ofToInt(mux[2])));
-  o_subSystem = ofBinaryToInt(ofToString(10 * ofToInt(mux[3]) + ofToInt(mux[4])));
+  if(updateOutputs){
+    o_system = ofBinaryToInt(ofToString(100 * ofToInt(mux[0]) + 10 * ofToInt(mux[1]) + ofToInt(mux[2])));
+    o_subSystem = ofBinaryToInt(ofToString(10 * ofToInt(mux[3]) + ofToInt(mux[4])));
+  }
 
   if(mux[5] == "1"){
     o_fx0 = true;
