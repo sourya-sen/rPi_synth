@@ -62,7 +62,7 @@ void ofApp::update(){
 
 	}
 
-  if(ofGetElapsedTimeMillis() % 40 == 0){
+  if(ofGetElapsedTimeMillis() % 1000 == 0){
     o_system = ofBinaryToInt(ofToString(100 * ofToInt(mux[0]) + 10 * ofToInt(mux[1]) + ofToInt(mux[2])));
     o_subSystem = ofBinaryToInt(ofToString(10 * ofToInt(mux[3]) + ofToInt(mux[4])));
 
