@@ -2,6 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+  ofSetFrameRate(60);
 
   a2d.setup("/dev/spidev0.0", SPI_MODE_0, 1000000, 8);
 
@@ -136,7 +137,7 @@ void ofApp::update(){
     }
 */
 
-  usleep(100);
+  // usleep(100);
 
 }
 
