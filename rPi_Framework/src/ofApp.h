@@ -41,5 +41,6 @@ class ofApp : public ofBaseApp{
 		vector<float> o_cv;
 
 		ofxOscSender sender;
+		bool updateOutputs;
 
 };
