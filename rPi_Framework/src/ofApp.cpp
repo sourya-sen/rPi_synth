@@ -130,11 +130,11 @@ void ofApp::update(){
   sender.sendMessage(fx2, false);
 
 
-  if(ofGetElapsedTimeMillis() % 100 == 0){
-      cout << "system: " << system << endl;
-      cout << "subsytem" << subSystem << endl;
-      cout << "FX: " << fx0 << " " << fx1 << " " << fx2 << endl;
-  }
+  // if(ofGetElapsedTimeMillis() % 100 == 0){
+  //     cout << "system: " << system << endl;
+  //     cout << "subsytem" << subSystem << endl;
+  //     cout << "FX: " << fx0 << " " << fx1 << " " << fx2 << endl;
+  // }
 
 
   // usleep(100);
