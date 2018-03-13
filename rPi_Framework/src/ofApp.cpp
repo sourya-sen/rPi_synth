@@ -2,7 +2,6 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-  ofSetFrameRate(60);
 
   a2d.setup("/dev/spidev0.0", SPI_MODE_0, 1000000, 8);
 
@@ -53,7 +52,6 @@ void ofApp::update(){
   int r2 [] = {0, 0, 0, 0, 1, 1, 1, 1};
 
   for(int i = 0; i< mux.size(); i++){
-    updateOutputs = false;
 
   	gpio14.setval_gpio(ofToString(r0[i]));
   	gpio15.setval_gpio(ofToString(r1[i]));
@@ -62,77 +60,77 @@ void ofApp::update(){
   	gpio17.getval_gpio(mux[i]);
   	usleep(100);
 
-    if(i == 7) updateOutputs = true;
 	}
 
-  if(updateOutputs){
+  if(ofGetElapsedTimeMillis() % 40 == 0){
     o_system = ofBinaryToInt(ofToString(100 * ofToInt(mux[0]) + 10 * ofToInt(mux[1]) + ofToInt(mux[2])));
     o_subSystem = ofBinaryToInt(ofToString(10 * ofToInt(mux[3]) + ofToInt(mux[4])));
-  }
 
-  if(mux[5] == "1"){
-    o_fx0 = true;
-  } else {
-    o_fx0 = false;
-  }
+    if(mux[5] == "1"){
+      o_fx0 = true;
+    } else {
+      o_fx0 = false;
+    }
 
-  if(mux[6] == "1"){
-    o_fx1 = true;
-  } else {
-    o_fx1 = false;
-  }
+    if(mux[6] == "1"){
+      o_fx1 = true;
+    } else {
+      o_fx1 = false;
+    }
 
-  if(mux[7] == "1"){
-    o_fx2= true;
-  } else {
-    o_fx2 = false;
-  }
+    if(mux[7] == "1"){
+      o_fx2= true;
+    } else {
+      o_fx2 = false;
+    }
 
 
-  int max = 1023 * 1023;
+    int max = 1023 * 1023;
 
-  for(int i = 0; i< o_cv.size(); i++){
-    o_cv[i] = ofMap(analogIn[i] * analogIn[i+4], 0, max, 0, 1.0f);
-  }
+    for(int i = 0; i< o_cv.size(); i++){
+      o_cv[i] = ofMap(analogIn[i] * analogIn[i+4], 0, max, 0, 1.0f);
+    }
 
-  //Let's send everything over OSC :)
-  //TODO: SEND ONLY IF THEY'RE NEW VALUES -> Add checks!
+    //Let's send everything over OSC :)
+    //TODO: SEND ONLY IF THEY'RE NEW VALUES -> Add checks!
 
-  if(lastSystem != o_system){
-    ofxOscMessage system;
-    system.setAddress("/sys");
-    system.addIntArg(o_system);
-    sender.sendMessage(system, false);
+    if(lastSystem != o_system){
+      ofxOscMessage system;
+      system.setAddress("/sys");
+      system.addIntArg(o_system);
+      sender.sendMessage(system, false);
 
-    lastSystem = o_system;
-  }
+      lastSystem = o_system;
+    }
 
-  ofxOscMessage subSystem;
-  subSystem.setAddress("/subSys");
-  subSystem.addIntArg(o_subSystem);
-  sender.sendMessage(subSystem, false);
+    ofxOscMessage subSystem;
+    subSystem.setAddress("/subSys");
+    subSystem.addIntArg(o_subSystem);
+    sender.sendMessage(subSystem, false);
 
-  for(int i = 0; i<o_cv.size(); i++){
-    ofxOscMessage cv;
-    cv.setAddress("/cv" + ofToString(i));
-    cv.addFloatArg(o_cv[i]);
-    sender.sendMessage(cv, false);
-  }
+    for(int i = 0; i<o_cv.size(); i++){
+      ofxOscMessage cv;
+      cv.setAddress("/cv" + ofToString(i));
+      cv.addFloatArg(o_cv[i]);
+      sender.sendMessage(cv, false);
+    }
 
-  ofxOscMessage fx0;
-  fx0.setAddress("/fx0");
-  fx0.addBoolArg(o_fx0);
-  sender.sendMessage(fx0, false);
+    ofxOscMessage fx0;
+    fx0.setAddress("/fx0");
+    fx0.addBoolArg(o_fx0);
+    sender.sendMessage(fx0, false);
 
-  ofxOscMessage fx1;
-  fx1.setAddress("/fx1");
-  fx1.addBoolArg(o_fx1);
-  sender.sendMessage(fx1, false);
+    ofxOscMessage fx1;
+    fx1.setAddress("/fx1");
+    fx1.addBoolArg(o_fx1);
+    sender.sendMessage(fx1, false);
 
-  ofxOscMessage fx2;
-  fx2.setAddress("/fx2");
-  fx2.addBoolArg(o_fx2);
-  sender.sendMessage(fx2, false);
+    ofxOscMessage fx2;
+    fx2.setAddress("/fx2");
+    fx2.addBoolArg(o_fx2);
+    sender.sendMessage(fx2, false);
+}
+
 /*
     if(ofGetElapsedTimeMillis()%1000 == 0){
         cout << "system: " << system << endl;
