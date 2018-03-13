@@ -44,7 +44,7 @@ void ofApp::update(){
 	     } else {
 	        analogIn[i] = a2d.getValueAllChannel(chip)[i];
 	       }
-      usleep(100);
+      usleep(10);
     }
 
   int r0 [] = {0, 1, 0, 1, 0, 1, 0, 1};
@@ -58,7 +58,7 @@ void ofApp::update(){
 	gpio18.setval_gpio(ofToString(r2[i]));
 
 	gpio17.getval_gpio(mux[i]);
-	usleep(100);
+	usleep(10);
 	}
 
   o_system = ofBinaryToInt(ofToString(100 * ofToInt(mux[0]) + 10 * ofToInt(mux[1]) + ofToInt(mux[2])));

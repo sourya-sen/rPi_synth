@@ -24,7 +24,7 @@ void ofApp::setup(){
     mainImage.allocate(1024, 768, GL_RGB);
     
     debugMode = false;
-    keyboardMode = true;
+    keyboardMode = false;
     
     ofSetBackgroundColor(0);
     
