@@ -61,11 +61,11 @@ void ofApp::update(){
   	gpio18.setval_gpio(ofToString(r2[i]));
 
   	gpio17.getval_gpio(mux[i]);
-  	usleep(100);
+  	//usleep(100);
 
 	}
 
-  usleep(100);
+  //usleep(100);
 
   /*
   o_system = ofBinaryToInt(ofToString(100 * ofToInt(mux[0]) + 10 * ofToInt(mux[1]) + ofToInt(mux[2])));
