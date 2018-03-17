@@ -1,5 +1,19 @@
 #include "ofApp.h"
 
+static int bToD(unsigned num){
+    unsigned res = 0;
+    
+    for(int i = 0; num > 0; ++i)
+    {
+        if((num % 10) == 1)
+            res += (1 << i);
+        
+        num /= 10;
+    }
+    
+    return res;
+}
+
 //--------------------------------------------------------------
 void ofApp::setup(){
     
@@ -10,12 +24,14 @@ void ofApp::setup(){
     receiver.setup(PORT);
     
     CV.resize(4);
-    fx0 = false;
-    fx1 = false;
-    fx2 = false;
+    gateIn.resize(8);
     
     system = 0;
     subSystem = 0;
+    
+    fx0 = false;
+    fx1 = false;
+    fx2 = false;
     
     //...load all the shaders here.
     shaders.resize(8);
@@ -23,12 +39,12 @@ void ofApp::setup(){
     
     mainImage.allocate(1024, 768, GL_RGB);
     
-    debugMode = false;
+    debugMode = true;
     keyboardMode = false;
     
     ofSetBackgroundColor(0);
     
-    ofSetFullscreen(true);
+//    ofSetFullscreen(true);
     
 #ifdef TARGET_OPENGLES
     ofHideCursor();
@@ -44,26 +60,26 @@ void ofApp::update(){
         ofxOscMessage m;
         receiver.getNextMessage(m);
         
-        if(m.getAddress() == "/sys"){
-            if(!keyboardMode) system = m.getArgAsInt(0);
-        } else if (m.getAddress() == "/subSys") {
-            subSystem = m.getArgAsInt(0);
-        } else if (m.getAddress() == "/fx0"){
-            fx0 = m.getArgAsBool(0);
-        } else if (m.getAddress() == "/fx1"){
-            fx1 = m.getArgAsBool(0);
-        } else if (m.getAddress() == "/fx2"){
-            fx2 = m.getArgAsBool(0);
-        } else if (m.getAddress() == "/cv0"){
-            CV[0] = m.getArgAsFloat(0);
-        } else if (m.getAddress() == "/cv1"){
-            CV[1] = m.getArgAsFloat(0);
-        } else if (m.getAddress() == "/cv2"){
-            CV[2] = m.getArgAsFloat(0);
-        } else if (m.getAddress() == "/cv3"){
-            CV[3] = m.getArgAsFloat(0);
+        if(m.getAddress() == "/cv"){
+            for(int i = 0; i<CV.size(); i++){
+                CV[i] = m.getArgAsFloat(i);
+            }
         }
+        
+        else if (m.getAddress() == "/gate"){
+            for(int i = 0; i<gateIn.size(); i++){
+                gateIn[i] = m.getArgAsInt(i);
+            }
+        }
+    
     }
+    
+    system = bToD(100 * gateIn[0] + 10 * gateIn[1] + gateIn[2]);
+    subSystem = bToD(10 * gateIn[3] + gateIn[4]);
+    
+    fx0 = gateIn[5];
+    fx1 = gateIn[6];
+    fx2 = gateIn[7];
     
     
     //----------> MAIN FBO CALL.
@@ -104,8 +120,12 @@ void ofApp::draw(){
         
         ofDrawBitmapStringHighlight("Running at: " + ofToString(ofGetWidth()) + " by " + ofToString(ofGetHeight()) + " at " + ofToString(ofGetFrameRate())
                                     , 10, ofGetHeight() - 30);
-                                    
-        ofDrawBitmapStringHighlight("System set is: " + ofToString(system), 10, ofGetHeight() - 15);
+        
+        stringstream gateValues;
+        
+        gateValues << "RAW GATE VALUES: " <<  gateIn[0] << gateIn[1] << gateIn[2] << gateIn[3] << gateIn[4] << gateIn[5] << gateIn[6] << gateIn[7] << endl;
+        
+        ofDrawBitmapStringHighlight(gateValues.str(), 10, ofGetHeight() - 15);
         
     }
     

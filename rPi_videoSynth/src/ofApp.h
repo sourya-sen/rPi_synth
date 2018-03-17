@@ -31,10 +31,11 @@ class ofApp : public ofBaseApp{
     
     ofxOscReceiver receiver;
     
+    vector<int> gateIn;
+    vector<float> CV;
     int system, subSystem;
     bool fx0, fx1, fx2;
-    vector<float> CV;
-    
+
     bool debugMode;
     bool keyboardMode;
     
