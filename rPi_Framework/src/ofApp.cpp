@@ -62,6 +62,7 @@ void ofApp::update(){
 
 	}
 
+  /*
   o_system = ofBinaryToInt(ofToString(100 * ofToInt(mux[0]) + 10 * ofToInt(mux[1]) + ofToInt(mux[2])));
   o_subSystem = ofBinaryToInt(ofToString(10 * ofToInt(mux[3]) + ofToInt(mux[4])));
 
@@ -82,13 +83,36 @@ void ofApp::update(){
   } else {
     o_fx2 = false;
   }
+  */
 
-
+  //sending CVs packed in one OSC message.
+  //......................................
   int max = 1023 * 1023;
 
-  for(int i = 0; i< o_cv.size(); i++){
+  ofxOscMessage cv;
+  cv.setAddress("/cv");
+
+  for(int i = 0; i < o_cv.size(); i++){
     o_cv[i] = ofMap(analogIn[i] * analogIn[i+4], 0, max, 0, 1.0f);
+    cv.addFloatArg(o_cv[i]);
   }
+
+  sender.sendMessage(cv, false);
+
+
+  //sending gate/triggers in one OSC message.
+  //.........................................
+  ofxOscMessage gates;
+  gates.setAddress("/gates");
+
+  for(int i = 0; i < mux.size(); i++){
+    int value = ofToInt(mux[i]);
+    gates.addIntArg(value);
+  }
+
+  sender.sendMessage(gates, false);
+
+/*
 
   //Let's send everything over OSC :)
   //TODO: SEND ONLY IF THEY'RE NEW VALUES -> Add checks!
@@ -138,6 +162,8 @@ void ofApp::update(){
 
 
   // usleep(100);
+
+  */
 
 }
 
