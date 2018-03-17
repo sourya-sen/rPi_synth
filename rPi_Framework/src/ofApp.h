@@ -40,6 +40,8 @@ class ofApp : public ofBaseApp{
 		bool o_fx0, o_fx1, o_fx2;
 		vector<float> o_cv;
 
+		ofxOscMessage cv;
+		ofxOscMessage gates;
 		ofxOscSender sender;
 
 };

@@ -33,6 +33,9 @@ void ofApp::setup(){
   o_cv.resize(4);
   sender.setup(HOST, PORT);
 
+  cv.setAddress("/cv");
+  gates.setAddress("/gates");
+
 }
 
 //--------------------------------------------------------------
@@ -91,9 +94,6 @@ void ofApp::update(){
   //......................................
   int max = 1023 * 1023;
 
-  ofxOscMessage cv;
-  cv.setAddress("/cv");
-
   for(int i = 0; i < o_cv.size(); i++){
     o_cv[i] = ofMap(analogIn[i] * analogIn[i+4], 0, max, 0, 1.0f);
     cv.addFloatArg(o_cv[i]);
@@ -104,8 +104,6 @@ void ofApp::update(){
 
   //sending gate/triggers in one OSC message.
   //.........................................
-  ofxOscMessage gates;
-  gates.setAddress("/gates");
 
   for(int i = 0; i < mux.size(); i++){
     int value = ofToInt(mux[i]);
