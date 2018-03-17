@@ -99,7 +99,7 @@ void ofApp::update(){
     cv.addFloatArg(o_cv[i]);
   }
 
-  sender.sendMessage(cv, false);
+  sender.sendMessage(cv, true);
 
 
   //sending gate/triggers in one OSC message.
@@ -110,7 +110,7 @@ void ofApp::update(){
     gates.addIntArg(value);
   }
 
-  sender.sendMessage(gates, false);
+  sender.sendMessage(gates, true);
 
 /*
 
