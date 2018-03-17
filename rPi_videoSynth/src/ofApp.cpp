@@ -3,11 +3,8 @@
 static int bToD(unsigned num){
     unsigned res = 0;
     
-    for(int i = 0; num > 0; ++i)
-    {
-        if((num % 10) == 1)
-            res += (1 << i);
-        
+    for(int i = 0; num > 0; ++i){
+        if((num % 10) == 1) res += (1 << i);
         num /= 10;
     }
     
@@ -44,7 +41,7 @@ void ofApp::setup(){
     
     ofSetBackgroundColor(0);
     
-//    ofSetFullscreen(true);
+    //    ofSetFullscreen(true);
     
 #ifdef TARGET_OPENGLES
     ofHideCursor();
@@ -66,12 +63,12 @@ void ofApp::update(){
             }
         }
         
-        else if (m.getAddress() == "/gate"){
+        else if (m.getAddress() == "/gates"){
             for(int i = 0; i<gateIn.size(); i++){
                 gateIn[i] = m.getArgAsInt(i);
             }
         }
-    
+        
     }
     
     system = bToD(100 * gateIn[0] + 10 * gateIn[1] + gateIn[2]);
@@ -91,7 +88,7 @@ void ofApp::update(){
     mainImage.end();
     
     //----------> EFFECTS INTEGRATION FBO (TO DO).
-
+    
     
 }
 
@@ -110,7 +107,7 @@ void ofApp::draw(){
     }
     
     mainImage.draw(x, y);
-
+    
     
     if(debugMode){
         ofDrawBitmapStringHighlight("System: " + ofToString(system), 10, 15);
@@ -237,7 +234,7 @@ void ofApp::mouseExited(int x, int y){
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
     
-//    mainImage.allocate(ofGetWidth(), ofGetHeight());
+    //    mainImage.allocate(ofGetWidth(), ofGetHeight());
     
 }
 
