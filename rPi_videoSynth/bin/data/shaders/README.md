@@ -29,8 +29,8 @@ out vec4 fragColor;
 If you're on the Pi, then the `headerVert` will look like this:
 ````
 precision highp float;
-#define IN varying
-#define OUT
+#define IN attribute
+#define OUT varying
 #define TEXTURE texture2D
 ````
 
