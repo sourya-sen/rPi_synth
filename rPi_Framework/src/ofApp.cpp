@@ -62,32 +62,6 @@ void ofApp::update(){
 
 	}
 
-  //usleep(100);
-
-  /*
-  o_system = ofBinaryToInt(ofToString(100 * ofToInt(mux[0]) + 10 * ofToInt(mux[1]) + ofToInt(mux[2])));
-  o_subSystem = ofBinaryToInt(ofToString(10 * ofToInt(mux[3]) + ofToInt(mux[4])));
-
-  if(mux[5] == "1"){
-    o_fx0 = true;
-  } else {
-    o_fx0 = false;
-  }
-
-  if(mux[6] == "1"){
-    o_fx1 = true;
-  } else {
-    o_fx1 = false;
-  }
-
-  if(mux[7] == "1"){
-    o_fx2= true;
-  } else {
-    o_fx2 = false;
-  }
-  */
-
-  //sending CVs packed in one OSC message.
   //......................................
   int max = 1023 * 1023;
 
@@ -114,85 +88,17 @@ void ofApp::update(){
 
   sender.sendMessage(gates, true);
 
-/*
-
-  //Let's send everything over OSC :)
-  //TODO: SEND ONLY IF THEY'RE NEW VALUES -> Add checks!
-
-  if(lastSystem != o_system){
-    ofxOscMessage system;
-    system.setAddress("/sys");
-    system.addIntArg(o_system);
-    sender.sendMessage(system, false);
-
-    lastSystem = o_system;
-  }
-
-  ofxOscMessage subSystem;
-  subSystem.setAddress("/subSys");
-  subSystem.addIntArg(o_subSystem);
-  sender.sendMessage(subSystem, false);
-
-  for(int i = 0; i<o_cv.size(); i++){
-    ofxOscMessage cv;
-    cv.setAddress("/cv" + ofToString(i));
-    cv.addFloatArg(o_cv[i]);
-    sender.sendMessage(cv, false);
-  }
-
-  ofxOscMessage fx0;
-  fx0.setAddress("/fx0");
-  fx0.addBoolArg(o_fx0);
-  sender.sendMessage(fx0, false);
-
-  ofxOscMessage fx1;
-  fx1.setAddress("/fx1");
-  fx1.addBoolArg(o_fx1);
-  sender.sendMessage(fx1, false);
-
-  ofxOscMessage fx2;
-  fx2.setAddress("/fx2");
-  fx2.addBoolArg(o_fx2);
-  sender.sendMessage(fx2, false);
-
-
-  // if(ofGetElapsedTimeMillis() % 100 == 0){
-  //     cout << "system: " << system << endl;
-  //     cout << "subsytem" << subSystem << endl;
-  //     cout << "FX: " << fx0 << " " << fx1 << " " << fx2 << endl;
-  // }
-
-
-  // usleep(100);
-
-  */
-
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-/*
-  for(int i = 0; i < analogIn.size(); i++){
-		float spacing = (ofGetWidth()/2)/float(analogIn.size());
-		ofDrawBitmapStringHighlight(ofToString(analogIn[i]), i * spacing + 20, 10);
-	}
-
-	for(int i = 0; i< mux.size(); i++){
-		float spacing = (ofGetWidth()/2)/float(mux.size());
-		ofDrawBitmapStringHighlight(ofToString(mux[i]), i * spacing + 20, 30);
-	}
-
-  ofDrawBitmapStringHighlight(ofToString(o_cv[0]), 0, ofGetHeight() - 20);
-*/
-
-
 	stringstream buf1, buf2;
 
   buf1 << "CVs: " << o_cv[0] << " - " << o_cv[1] << " - " << o_cv[2] << " - " << o_cv[3] << endl;
   buf2 << "Triggers: " << mux[0] << mux[1] << mux[2] << mux[3] << mux[4] << mux[5] << mux[6] << mux[7] << endl;
 
-ofDrawBitmapStringHighlight(buf1.str(), 20, 20);
-ofDrawBitmapStringHighlight(buf2.str(), 20, 35);
+  ofDrawBitmapStringHighlight(buf1.str(), 20, 20);
+  ofDrawBitmapStringHighlight(buf2.str(), 20, 35);
 }
 
 //--------------------------------------------------------------
