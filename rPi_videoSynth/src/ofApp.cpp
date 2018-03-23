@@ -40,6 +40,7 @@ void ofApp::setup(){
     keyboardMode = false;
     
     ofSetBackgroundColor(0);
+    lastSystem = -1;
     
     //    ofSetFullscreen(true);
     
@@ -130,23 +131,28 @@ void ofApp::draw(){
 }
 
 //--------------------------------------------------------------
-void ofApp::sendUniforms(int selectedShader){
-    shaders[selectedShader].setUniform1f("CV0", CV[0]);
-    shaders[selectedShader].setUniform1f("CV1", CV[1]);
-    shaders[selectedShader].setUniform1f("CV2", CV[2]);
-    shaders[selectedShader].setUniform1f("CV3", CV[3]);
-    shaders[selectedShader].setUniform1f("time", ofGetElapsedTimef());
-    shaders[selectedShader].setUniform1i("subSystem", subSystem);
-    shaders[selectedShader].setUniform2f("resolution", ofVec2f(1024, 768));
+void ofApp::sendUniforms(ofShader * _shader){
+    _shader->setUniform1f("CV0", CV[0]);
+    _shader->setUniform1f("CV1", CV[1]);
+    _shader->setUniform1f("CV2", CV[2]);
+    _shader->setUniform1f("CV3", CV[3]);
+    _shader->setUniform1f("time", ofGetElapsedTimef());
+    _shader->setUniform1i("subSystem", subSystem);
+    _shader->setUniform2f("resolution", ofVec2f(1024, 768));
     
 }
 //--------------------------------------------------------------
 void ofApp::runSystem(int _sys){
     
-    shaders[_sys].begin();
-    sendUniforms(_sys);
+    if(lastSystem != system){
+        selectedShader = &shaders[system];
+        lastSystem = system;
+    }
+    
+    selectedShader->begin();
+    sendUniforms(selectedShader);
     ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
-    shaders[_sys].end();
+    selectedShader->end();
     
     
 }

@@ -24,7 +24,7 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    void sendUniforms(int selectedShader);
+    void sendUniforms(ofShader * _shader);
     void runSystem(int _sys);
     
     void loadShaders();
@@ -34,12 +34,14 @@ class ofApp : public ofBaseApp{
     vector<int> gateIn;
     vector<float> CV;
     int system, subSystem;
+    int lastSystem;
     bool fx0, fx1, fx2;
 
     bool debugMode;
     bool keyboardMode;
     
     vector<ofShader> shaders;
+    ofShader * selectedShader;
     ofFbo mainImage;
 		
 };
