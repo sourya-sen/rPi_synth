@@ -34,6 +34,8 @@
 		return 1.-smoothstep(_radius-(_radius*0.1), _radius+(_radius*0.1), dot(dist,dist)*4.0);
 	}
 
+	#if subSystem == 0
+
 	void main()
 	{
 		vec2 position = ( gl_FragCoord.xy / resolution.xy );
@@ -46,19 +48,80 @@
 
 		color = vec3(circle(position, CV0));
 
-		// if(subSystem == 0){
-		// 	//color += noise(position.x, 1.0, 1.0, time);
-		// 	color.xyz *= noise(position.y, 100.0 * CV1, 100.0 * CV2, time * CV3);
-		// } else if (subSystem == 1){
-		// 	color.xyz += noise(position.x, 1.0 * CV1, 10.0 * CV2, time * CV3);
-		// } else if (subSystem == 2){
-		// 	color += noise(position.x, 1.0 * CV1, 1.0 * CV2, time * CV3);
-		// 	color *= noise(position.y, 1.0 * CV1, 1.0 * CV2, time * CV3);
-		// } else if (subSystem == 3){
-		// 	color.xyz *= noise(position.y, 100.0 * CV1, 100.0 * CV2, time * CV3);
-		// }
+		color.xyz *= noise(position.y, 100.0 * CV1, 100.0 * CV2, time * CV3);
+
+		FRAG_COLOR = vec4(color, 1.0);
+	}
+
+	#elif subSystem == 1
+
+	void main()
+	{
+		vec2 position = ( gl_FragCoord.xy / resolution.xy );
+		position.x -= 0.5;
+		position.y -= 0.5;
+
+		position.x *= resolution.x/resolution.y;
+
+		vec3 color = vec3(0.0, 0.0, 0.0);
+
+		color = vec3(circle(position, CV0));
+
+		color.xyz += noise(position.x, 1.0 * CV1, 10.0 * CV2, time * CV3);
+
+		FRAG_COLOR = vec4(color, 1.0);
+	}
+
+	#elif subSystem == 2
+
+	void main()
+	{
+		vec2 position = ( gl_FragCoord.xy / resolution.xy );
+		position.x -= 0.5;
+		position.y -= 0.5;
+
+		position.x *= resolution.x/resolution.y;
+
+		vec3 color = vec3(0.0, 0.0, 0.0);
+
+		color = vec3(circle(position, CV0));
+
+		color += noise(position.x, 1.0 * CV1, 1.0 * CV2, time * CV3);
+		color *= noise(position.y, 1.0 * CV1, 1.0 * CV2, time * CV3);
+
+		FRAG_COLOR = vec4(color, 1.0);
+	}
+
+	#elif subSystem == 3
+
+	void main()
+	{
+		vec2 position = ( gl_FragCoord.xy / resolution.xy );
+		position.x -= 0.5;
+		position.y -= 0.5;
+
+		position.x *= resolution.x/resolution.y;
+
+		vec3 color = vec3(0.0, 0.0, 0.0);
+
+		color = vec3(circle(position, CV0));
 
 		color.xyz *= noise(position.y, 100.0 * CV1, 100.0 * CV2, time * CV3);
 
 		FRAG_COLOR = vec4(color, 1.0);
 	}
+
+	#endif
+
+
+	// if(subSystem == 0){
+	// 	//color += noise(position.x, 1.0, 1.0, time);
+	// 	color.xyz *= noise(position.y, 100.0 * CV1, 100.0 * CV2, time * CV3);
+	// } else if (subSystem == 1){
+	// 	color.xyz += noise(position.x, 1.0 * CV1, 10.0 * CV2, time * CV3);
+	// } else if (subSystem == 2){
+	// 	color += noise(position.x, 1.0 * CV1, 1.0 * CV2, time * CV3);
+	// 	color *= noise(position.y, 1.0 * CV1, 1.0 * CV2, time * CV3);
+	// } else if (subSystem == 3){
+	// 	color.xyz *= noise(position.y, 100.0 * CV1, 100.0 * CV2, time * CV3);
+	// }
