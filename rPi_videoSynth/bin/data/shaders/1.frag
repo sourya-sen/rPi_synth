@@ -46,17 +46,19 @@
 
 		color = vec3(circle(position, CV0));
 
-		if(subSystem == 0){
-			//color += noise(position.x, 1.0, 1.0, time);
-			color.xyz *= noise(position.y, 100.0 * CV1, 100.0 * CV2, time * CV3);
-		} else if (subSystem == 1){
-			color.xyz += noise(position.x, 1.0 * CV1, 10.0 * CV2, time * CV3);
-		} else if (subSystem == 2){
-			color += noise(position.x, 1.0 * CV1, 1.0 * CV2, time * CV3);
-			color *= noise(position.y, 1.0 * CV1, 1.0 * CV2, time * CV3);
-		} else if (subSystem == 3){
-			color.xyz *= noise(position.y, 100.0 * CV1, 100.0 * CV2, time * CV3);
-		}
+		// if(subSystem == 0){
+		// 	//color += noise(position.x, 1.0, 1.0, time);
+		// 	color.xyz *= noise(position.y, 100.0 * CV1, 100.0 * CV2, time * CV3);
+		// } else if (subSystem == 1){
+		// 	color.xyz += noise(position.x, 1.0 * CV1, 10.0 * CV2, time * CV3);
+		// } else if (subSystem == 2){
+		// 	color += noise(position.x, 1.0 * CV1, 1.0 * CV2, time * CV3);
+		// 	color *= noise(position.y, 1.0 * CV1, 1.0 * CV2, time * CV3);
+		// } else if (subSystem == 3){
+		// 	color.xyz *= noise(position.y, 100.0 * CV1, 100.0 * CV2, time * CV3);
+		// }
+
+		color.xyz *= noise(position.y, 100.0 * CV1, 100.0 * CV2, time * CV3);
 
 		FRAG_COLOR = vec4(color, 1.0);
 	}
