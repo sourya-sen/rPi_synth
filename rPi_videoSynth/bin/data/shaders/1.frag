@@ -17,8 +17,11 @@
 	uniform int subSystem;
 	uniform vec2 resolution;
 
-	float[] xnoise = {0.0, 0.0, 1.0, 10.0, 1.0, 1.0, 0.0, 0.0};
-	float[] ynoise = {100.0, 100.0, 0.0, 0.0, 1.0, 1.0, 100.0, 100.0};
+	float xnoise[8];
+	xnoise = float[](0.0, 0.0, 1.0, 10.0, 1.0, 1.0, 0.0, 0.0);
+
+	float ynoise[8];
+	ynoise = float[](100.0, 100.0, 0.0, 0.0, 1.0, 1.0, 100.0, 100.0);
 
 	float noise(float v, float amplitude, float frequency, float time) {
 	float r = sin(v * frequency);
