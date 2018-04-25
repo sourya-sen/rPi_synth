@@ -44,6 +44,26 @@
 
 		color = vec3(circle(position, CV0));
 
+		switch(subSystem){
+			case 0:
+			//color += noise(position.x, 1.0, 1.0, time);
+			color.xyz *= noise(position.y, 100.0 * CV1, 100.0 * CV2, time * CV3);
+			break;
+
+			case 1:
+			color.xyz += noise(position.x, 1.0 * CV1, 10.0 * CV2, time * CV3);
+			break;
+
+			case 2:
+			color += noise(position.x, 1.0 * CV1, 1.0 * CV2, time * CV3);
+			color *= noise(position.y, 1.0 * CV1, 1.0 * CV2, time * CV3);
+			break;
+
+			case 3:
+			//color += noise(position.x, 1.0, 1.0, time);
+			color.xyz *= noise(position.y, 100.0 * CV1, 100.0 * CV2, time * CV3);
+			break;
+		}
 		//color += noise(position.x, 1.0, 1.0, time);
 		color.xyz *= noise(position.y, 100.0 * CV1, 100.0 * CV2, time * CV3);
 
