@@ -1,4 +1,5 @@
 #pragma include "headerFrag.glsl"
+//modified from http://glslsandbox.com/e#46602.0
 
 	uniform sampler2D tex;
 
@@ -14,15 +15,38 @@
 	uniform int subSystem;
 	uniform vec2 resolution;
 
+	float noise(float v, float amplitude, float frequency, float time) {
+	float r = sin(v * frequency);
+	float t = 0.01*(-time*130.0);
+	r += sin(v*frequency*2.1 + t)*4.5;
+	r += sin(v*frequency*1.72 + t*1.121)*4.0;
+	r += sin(v*frequency*2.221 + t*0.437)*5.0;
+	r += sin(v*frequency*3.1122+ t*4.269)*2.5;
+	r *= amplitude*0.06;
+
+	return r;
+	}
+
+	float circle(in vec2 _st, in float _radius){
+    vec2 dist = _st-vec2(0.0);
+		return 1.-smoothstep(_radius-(_radius*0.1), _radius+(_radius*0.1), dot(dist,dist)*4.0);
+	}
+
 	void main()
 	{
-		vec2 r = resolution,
-		o = (gl_FragCoord.xy - .5*r) / r.y * min(0.3, CV3);
-		float p = (.5+floor(5.*o.x)) * CV0;
-		o.x = mod(o.x, .2) - .1;
-		o.y+=p * CV2;
-		vec4 s = .1*cos(1.6*vec4(0,1,2,3)+p*.3*time+sin(o.y*4.+p*3.+cos(time))),
-		e = s.yzwx,
-		f = min(o.x-s,e-o.x);
-		FRAG_COLOR = dot(clamp(-1.+f*r.y,0.,1.),40.*(s-e))*(s-.21)+f*5.0*CV1;
+		vec2 position = ( gl_FragCoord.xy / resolution.xy );
+		position.x -= 0.5;
+		position.y -= 0.5;
+
+		position.x *= resolution.x/resolution.y;
+
+		vec3 color = vec3(0.0, 0.0, 0.0);
+
+		color = vec3(circle(position, CV0));
+
+		//color += noise(position.x, 1.0, 1.0, time);
+		color *= noise(position.y, 100.0 * CV1, 100 * CV2, time * CV3);
+
+
+		FRAG_COLOR = vec4(color, 1.0);
 	}

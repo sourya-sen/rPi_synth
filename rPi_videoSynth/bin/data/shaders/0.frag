@@ -1,4 +1,5 @@
 #pragma include "headerFrag.glsl"
+		//original code from http://glslsandbox.com/e#45360.0
 
 	uniform sampler2D tex;
 
@@ -13,8 +14,6 @@
 	uniform float time;
 	uniform int subSystem;
 	uniform vec2 resolution;
-
-	//original code from http://glslsandbox.com/e#45360.0
 
 	void main()
 	{
