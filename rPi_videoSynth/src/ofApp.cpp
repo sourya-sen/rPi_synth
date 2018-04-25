@@ -125,7 +125,7 @@ void ofApp::draw(){
         if(fx0){
             //Draw inverted image.
         } else if (fx1){
-            //Draw whiteStrobe.
+            whiteStrobe.draw(x, y);
         }
     }
    
