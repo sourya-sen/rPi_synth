@@ -45,7 +45,7 @@
 		color = vec3(circle(position, CV0));
 
 		//color += noise(position.x, 1.0, 1.0, time);
-		color *= noise(position.y, 100.0 * CV1, 100 * CV2, time * CV3);
+		color.xyz *= noise(position.y, 100.0 * CV1, 100.0 * CV2, time * CV3);
 
 
 		FRAG_COLOR = vec4(color, 1.0);
