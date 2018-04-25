@@ -1,6 +1,8 @@
 #pragma include "headerFrag.glsl"
 //modified from http://glslsandbox.com/e#46602.0
 
+#extension GL_OES_standard_derivatives : enable
+
 	uniform sampler2D tex;
 
 	IN vec4 v_color;
