@@ -30,11 +30,18 @@ void ofApp::setup(){
     fx1 = false;
     fx2 = false;
     
-    //...load all the shaders here.
+    //------> load all the shaders here.
     shaders.resize(8);
     loadShaders();
     
-    mainImage.allocate(1024, 768, GL_RGB);
+    mainImage.allocate(WIDTH, HEIGHT, GL_RGB);
+    whiteStrobe.allocate(WIDTH, HEIGHT, GL_RGB);
+    invertedImage.allocate(WIDTH, HEIGHT, GL_RGB);
+    
+    whiteStrobe.begin();
+    ofSetColor(255, 255, 255);
+    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+    whiteStrobe.end();
     
     debugMode = true;
     keyboardMode = false;
@@ -42,7 +49,7 @@ void ofApp::setup(){
     ofSetBackgroundColor(0);
     lastSystem = -1;
     
-    //    ofSetFullscreen(true);
+    //ofSetFullscreen(true);
     
 #ifdef TARGET_OPENGLES
     ofHideCursor();
@@ -84,11 +91,13 @@ void ofApp::update(){
     
     mainImage.begin();
     ofClear(0);
-    runSystem(system);
+    
+    if (fx2) runSystem(system); //Don't refresh if the 'enable' toggle isn't open.
     
     mainImage.end();
     
     //----------> EFFECTS INTEGRATION FBO (TO DO).
+
     
     
 }
@@ -96,20 +105,32 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     
+    
+    //----------> MAKING SURE THE 1024X768 WINDOW ALWAYS DRAWS IN THE CENTRE.
     float x = 0;
     float y = 0;
     
-    if(ofGetWidth() != 1024){
-        x = (ofGetWidth() - 1024)/2.0;
+    if(ofGetWidth() != WIDTH){
+        x = (ofGetWidth() - WIDTH)/2.0;
     }
     
-    if(ofGetHeight() != 768){
-        y = (ofGetHeight() - 768)/2.0;
+    if(ofGetHeight() != HEIGHT){
+        y = (ofGetHeight() - HEIGHT)/2.0;
     }
     
-    mainImage.draw(x, y);
+    //------------> WHICH FBO TO DRAW?
+    if((!fx0) && (!fx1)){
+        mainImage.draw(x, y);
+    } else {
+        if(fx0){
+            //Draw inverted image.
+        } else if (fx1){
+            //Draw whiteStrobe.
+        }
+    }
+   
     
-    
+    //-------------> DEBUG MESSAGES, IF ENABLED.
     if(debugMode){
         ofDrawBitmapStringHighlight("System: " + ofToString(system), 10, 15);
         ofDrawBitmapStringHighlight("Sub System: " + ofToString(subSystem), 10, 35);
@@ -138,7 +159,7 @@ void ofApp::sendUniforms(ofShader * _shader){
     _shader->setUniform1f("CV3", CV[3]);
     _shader->setUniform1f("time", ofGetElapsedTimef());
     _shader->setUniform1i("subSystem", subSystem);
-    _shader->setUniform2f("resolution", ofVec2f(1024, 768));
+    _shader->setUniform2f("resolution", ofVec2f(WIDTH, HEIGHT));
     
 }
 //--------------------------------------------------------------

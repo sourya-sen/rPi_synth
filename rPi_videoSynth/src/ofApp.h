@@ -4,6 +4,8 @@
 #include "ofxOsc.h"
 
 #define PORT 12345
+#define WIDTH 1024
+#define HEIGHT 768
 
 class ofApp : public ofBaseApp{
 
@@ -42,6 +44,9 @@ class ofApp : public ofBaseApp{
     
     vector<ofShader> shaders;
     ofShader * selectedShader;
+    
     ofFbo mainImage;
+    ofFbo whiteStrobe;
+    ofFbo invertedImage;
 		
 };
