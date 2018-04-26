@@ -30,7 +30,7 @@ void ofApp::setup(){
 		m = "0";
 	}
 
-  o_cv.resize(4);
+  o_cv.resize(8);
   sender.setup(HOST, PORT);
 
 }
@@ -63,13 +63,11 @@ void ofApp::update(){
 	}
 
   //......................................
-  int max = 1023 * 1023;
-
   ofxOscMessage cv;
   cv.setAddress("/cv");
 
   for(int i = 0; i < o_cv.size(); i++){
-    o_cv[i] = ofMap(analogIn[i] * analogIn[i+4], 0, max, 0, 1.0f);
+    o_cv[i] = ofMap(analogIn[i], 0, 1023, 0, 1.0f);
     cv.addFloatArg(o_cv[i]);
   }
 
