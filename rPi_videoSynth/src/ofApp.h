@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxOsc.h"
+#include "ControlVoltage.h"
 
 #define PORT 12345
 #define WIDTH 1024
