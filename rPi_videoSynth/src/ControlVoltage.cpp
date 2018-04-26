@@ -35,4 +35,15 @@ double ControlVoltage::filteredValue(double _in, double _lastOut){
     return answer;
 }
 //--------------------------------------------------------------
+void ControlVoltage::setAlpha(float _alpha){
+    alpha = _alpha;
+}
+//--------------------------------------------------------------
+void ControlVoltage::setExponential(){
+    exponentialReturn = true;
+}
 
+//--------------------------------------------------------------
+void ControlVoltage::setUnipolar(){
+    bipolarVolts = false;
+}

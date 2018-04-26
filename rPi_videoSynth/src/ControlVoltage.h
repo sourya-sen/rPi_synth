@@ -7,6 +7,10 @@ public:
     void readValue(double _in);
     double getFiltered();
     
+    void setAlpha(float _alpha);
+    void setExponential();
+    void setUnipolar();
+    
 private:
     double filteredValue(double _in, double _lastOut);
     float alpha;
