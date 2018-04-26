@@ -23,6 +23,10 @@ void ofApp::setup(){
     CV.resize(4);
     gateIn.resize(8);
     
+    CV[0].setExponential();
+    CV[2].setUnipolar();
+    CV[3].setUnipolar();
+    
     system = 0;
     subSystem = 0;
     
