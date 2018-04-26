@@ -6,8 +6,8 @@
 	uniform sampler2D tex;
 
 	IN vec4 v_color;
-  IN vec2 v_texCoord;
-  IN vec4 v_normal;
+	IN vec2 v_texCoord;
+	IN vec4 v_normal;
 
 	uniform float CV0;
 	uniform float CV1;
@@ -18,10 +18,8 @@
 	uniform vec2 resolution;
 
 	float xnoise[8];
-	xnoise = float[](0.0, 0.0, 1.0, 10.0, 1.0, 1.0, 0.0, 0.0);
-
+	
 	float ynoise[8];
-	ynoise = float[](100.0, 100.0, 0.0, 0.0, 1.0, 1.0, 100.0, 100.0);
 
 	float noise(float v, float amplitude, float frequency, float time) {
 	float r = sin(v * frequency);
@@ -42,6 +40,9 @@
 
 	void main()
 	{
+		//xnoise = {0.0, 0.0, 1.0, 10.0, 1.0, 1.0, 0.0, 0.0};
+		//ynoise = {100.0, 100.0, 0.0, 0.0, 1.0, 1.0, 100.0, 100.0};
+		
 		vec2 position = ( gl_FragCoord.xy / resolution.xy );
 		position.x -= 0.5;
 		position.y -= 0.5;
@@ -52,8 +53,8 @@
 
 		color = vec3(circle(position, CV0));
 
-		color.xyz += noise(position.x, xnoise[2*subSystem] * CV1, xnoise[2*subSystem+1] * CV2, time * CV3);
-		color.xyz *= noise(position.y, ynoise[2*subSystem] * CV1, ynoise[2*subSystem+1] * CV2, time * CV3);
+		color += noise(position.x, float(4 - subSystem) * 1.0 * CV1, float(subSystem) * 2.0 * CV2, time * CV3);
+		color.xyz *= noise(position.y, float(4 - subSystem) * 100.0 * CV1, float(4 - subSystem) * 100.0 * CV2, time * CV3);
 
 		FRAG_COLOR = vec4(color, 1.0);
 	}
