@@ -94,7 +94,7 @@ void ofApp::update(){
     //----------> COMPUTE UNIFORM CVs
     
     for(int i = 0; i < u_CV.size(); i++){
-        u_CV[i] = CVin[2*i].getRaw() * CVin[2*i + 1].getFiltered();
+        u_CV[i] = CVin[i].getRaw() * CVin[i+4].getFiltered();
     }
     
     
