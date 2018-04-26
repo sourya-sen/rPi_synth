@@ -5,7 +5,9 @@ class ControlVoltage{
 public:
     ControlVoltage();
     void readValue(double _in);
+    
     double getFiltered();
+    double getRaw();
     
     void setAlpha(float _alpha);
     void setExponential();

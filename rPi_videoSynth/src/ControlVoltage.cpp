@@ -35,6 +35,10 @@ double ControlVoltage::filteredValue(double _in, double _lastOut){
     return answer;
 }
 //--------------------------------------------------------------
+double ControlVoltage::getRaw(){
+    return currentValue;
+}
+//--------------------------------------------------------------
 void ControlVoltage::setAlpha(float _alpha){
     alpha = _alpha;
 }

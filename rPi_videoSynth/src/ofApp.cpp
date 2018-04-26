@@ -20,12 +20,13 @@ void ofApp::setup(){
     
     receiver.setup(PORT);
     
-    CV.resize(4);
+    CVin.resize(8);
     gateIn.resize(8);
+    u_CV.resize(4);
     
-    CV[0].setExponential();
-    CV[2].setUnipolar();
-    CV[3].setUnipolar();
+    CVin[4].setExponential();
+    CVin[6].setUnipolar();
+    CVin[7].setUnipolar();
     
     system = 0;
     subSystem = 0;
@@ -70,8 +71,8 @@ void ofApp::update(){
         receiver.getNextMessage(m);
         
         if(m.getAddress() == "/cv"){
-            for(int i = 0; i<CV.size(); i++){
-                CV[i].readValue(m.getArgAsFloat(i));
+            for(int i = 0; i<CVin.size(); i++){
+                CVin[i].readValue(m.getArgAsFloat(i));
             }
         }
         
@@ -89,6 +90,12 @@ void ofApp::update(){
     fx0 = gateIn[5];
     fx1 = gateIn[6];
     fx2 = gateIn[7];
+    
+    //----------> COMPUTE UNIFORM CVs
+    
+    for(int i = 0; i < u_CV.size(); i++){
+        u_CV[i] = CVin[2*i].getRaw() * CVin[2*i + 1].getFiltered();
+    }
     
     
     //----------> MAIN FBO CALL.
@@ -139,7 +146,7 @@ void ofApp::draw(){
         ofDrawBitmapStringHighlight("System: " + ofToString(system), 10, 15);
         ofDrawBitmapStringHighlight("Sub System: " + ofToString(subSystem), 10, 35);
         ofDrawBitmapStringHighlight("FXs:" + ofToString(fx0) + " " + ofToString(fx1) + " " + ofToString(fx2), 10, 55);
-        ofDrawBitmapStringHighlight("CVs:" + ofToString(CV[0].getFiltered()) + " " + ofToString(CV[1].getFiltered()) + " " + ofToString(CV[2].getFiltered()) + " " + ofToString(CV[3].getFiltered()), 10, 75);
+        ofDrawBitmapStringHighlight("CVs:" + ofToString(u_CV[0]) + " " + ofToString(u_CV[1]) + " " + ofToString(u_CV[2]) + " " + ofToString(u_CV[3]), 10, 75);
         
         ofDrawBitmapStringHighlight("Running at: " + ofToString(ofGetWidth()) + " by " + ofToString(ofGetHeight()) + " at " + ofToString(ofGetFrameRate())
                                     , 10, ofGetHeight() - 30);
@@ -157,10 +164,10 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::sendUniforms(ofShader * _shader){
-    _shader->setUniform1f("CV0", CV[0].getFiltered());
-    _shader->setUniform1f("CV1", CV[1].getFiltered());
-    _shader->setUniform1f("CV2", CV[2].getFiltered());
-    _shader->setUniform1f("CV3", CV[3].getFiltered());
+    _shader->setUniform1f("CV0", u_CV[0]);
+    _shader->setUniform1f("CV1", u_CV[1]);
+    _shader->setUniform1f("CV2", u_CV[2]);
+    _shader->setUniform1f("CV3", u_CV[3]);
     _shader->setUniform1f("time", ofGetElapsedTimef());
     _shader->setUniform1i("subSystem", subSystem);
     _shader->setUniform2f("resolution", ofVec2f(WIDTH, HEIGHT));

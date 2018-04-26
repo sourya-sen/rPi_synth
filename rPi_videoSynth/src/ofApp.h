@@ -35,7 +35,8 @@ class ofApp : public ofBaseApp{
     ofxOscReceiver receiver;
     
     vector<int> gateIn;
-    vector<ControlVoltage> CV;
+    vector<ControlVoltage> CVin;
+    vector<double> u_CV;
     int system, subSystem;
     int lastSystem;
     bool fx0, fx1, fx2;
