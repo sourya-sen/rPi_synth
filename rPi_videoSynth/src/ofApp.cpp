@@ -67,7 +67,7 @@ void ofApp::update(){
         
         if(m.getAddress() == "/cv"){
             for(int i = 0; i<CV.size(); i++){
-                CV[i] = m.getArgAsFloat(i);
+                CV[i].readValue(m.getArgAsFloat(i));
             }
         }
         
@@ -153,10 +153,10 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::sendUniforms(ofShader * _shader){
-    _shader->setUniform1f("CV0", CV[0]);
-    _shader->setUniform1f("CV1", CV[1]);
-    _shader->setUniform1f("CV2", CV[2]);
-    _shader->setUniform1f("CV3", CV[3]);
+    _shader->setUniform1f("CV0", CV[0].getFiltered());
+    _shader->setUniform1f("CV1", CV[1].getFiltered());
+    _shader->setUniform1f("CV2", CV[2].getFiltered());
+    _shader->setUniform1f("CV3", CV[3].getFiltered());
     _shader->setUniform1f("time", ofGetElapsedTimef());
     _shader->setUniform1i("subSystem", subSystem);
     _shader->setUniform2f("resolution", ofVec2f(WIDTH, HEIGHT));
