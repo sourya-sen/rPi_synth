@@ -146,7 +146,8 @@ void ofApp::draw(){
         ofDrawBitmapStringHighlight("System: " + ofToString(system), 10, 15);
         ofDrawBitmapStringHighlight("Sub System: " + ofToString(subSystem), 10, 35);
         ofDrawBitmapStringHighlight("FXs:" + ofToString(fx0) + " " + ofToString(fx1) + " " + ofToString(fx2), 10, 55);
-        ofDrawBitmapStringHighlight("CVs:" + ofToString(u_CV[0]) + " " + ofToString(u_CV[1]) + " " + ofToString(u_CV[2]) + " " + ofToString(u_CV[3]), 10, 75);
+        ofDrawBitmapStringHighlight("Uniform CVs:" + ofToString(u_CV[0]) + " " + ofToString(u_CV[1]) + " " + ofToString(u_CV[2]) + " " + ofToString(u_CV[3]), 10, 75);
+	ofDrawBitmapStringHighlight("Incoming CVs:" + ofToString(CVin[4].getFiltered()) + " " + ofToString(CVin[5].getFiltered()) + " " + ofToString(CVin[6].getFiltered()) + " " + ofToString(CVin[7].getFiltered()), 10, 95);	
         
         ofDrawBitmapStringHighlight("Running at: " + ofToString(ofGetWidth()) + " by " + ofToString(ofGetHeight()) + " at " + ofToString(ofGetFrameRate())
                                     , 10, ofGetHeight() - 30);

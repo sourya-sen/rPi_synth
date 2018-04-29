@@ -18,8 +18,8 @@ double ControlVoltage::getFiltered(){
     
     lastValue = answer;
     
-    if(!bipolarVolts){
-        answer = ofMap(answer, 0.5, 1.0, 0.0, 1.0);
+    if(bipolarVolts == false){
+        answer = ofMap(answer, 0.5, 1.0, 0.0, 1.0, true);
     }
     
     if (exponentialReturn){
