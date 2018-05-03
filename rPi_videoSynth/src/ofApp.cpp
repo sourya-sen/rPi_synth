@@ -48,13 +48,13 @@ void ofApp::setup(){
     ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
     whiteStrobe.end();
     
-    debugMode = true;
+    debugMode = false;
     keyboardMode = false;
     
     ofSetBackgroundColor(0);
     lastSystem = -1;
     
-    //ofSetFullscreen(true);
+    ofSetFullscreen(true);
     
 #ifdef TARGET_OPENGLES
     ofHideCursor();
