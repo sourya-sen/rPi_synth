@@ -23,5 +23,5 @@
 	    vec4 s = 0.07*cos(1.5*vec4(10. * CV0, 10. * CV1, 10. * CV2, 10. * CV3) + time + o.y + cos(o.y) * cos(time)),
 	    e = s.yzwx,
 	    f = max(o.x-s,e-o.x);
-	    FRAG_COLOR = dot(clamp(f*r.y,0.,(1. + 2.0)), (50.0 + 50.0)*(s-e)) * (s-(.1));
+	    FRAG_COLOR = dot(clamp(f*r.y,0.,(1. + 2.0)), (10.0 + 5.0)*(s-e)) * (s-(.1));
 	}
