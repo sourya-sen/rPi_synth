@@ -19,8 +19,8 @@
 		vec2 position = ( gl_FragCoord.xy / resolution.xy );
 
 		float color = 0.0;
-		color  = sin( position.x * (6.0 * CV0 * float(subSystem + 3)) + sin( position.y * 12.0 * float(subSystem + 1) + time * 3.0 * CV3 + 3.14 ) );
-		color *= cos( position.x * (17.0 * CV0 * float(subSystem + 2)) + cos( position.x * 3.0 * float(subSystem + 9) + time * 2.0 * CV3 ) );
+		color  = sin( position.x * (6.0 * CV0 * float(subSystem + 3)) + sin( position.y * 12.0 * float(subSystem + 1) + time * 30.0 * CV3 + 3.14 ) );
+		color *= cos( position.x * (17.0 * CV0 * float(subSystem + 2)) + cos( position.x * 3.0 * float(subSystem + 9) + time * 20.0 * CV3 ) );
 
 		FRAG_COLOR = vec4(color + CV1, color + CV2, color + CV1 + CV2, 1.0);
 
