@@ -20,7 +20,7 @@
 	    vec2 r = resolution,
 	    o = gl_FragCoord.xy - r/2.;
 	    o = vec2(length(o) / r.y - (.1 + .3 * CV3), atan(o.y,o.x));
-	    vec4 s = 0.07*cos(1.5*vec4((subSystem % 1),(subsystem & 2), (subSystem & 3),(subSystem & 4)) + time + o.y + cos(o.y) * cos(time)),
+	    vec4 s = 0.07*cos(1.5*vec4(int(subSystem % 1), int(subsystem & 2), int(subSystem & 3), int(subSystem & 4)) + time + o.y + cos(o.y) * cos(time)),
 	    e = s.yzwx,
 	    f = max(o.x-s,e-o.x);
 	    FRAG_COLOR = dot(clamp(f*r.y,0.,(1. + 2.0 * CV2)), (50.0 + 50.0 * CV1)*(s-e)) * (s-(.1 * CV0));
