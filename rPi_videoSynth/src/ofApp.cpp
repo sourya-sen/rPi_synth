@@ -135,7 +135,9 @@ void ofApp::draw(){
     } else {
         if(fx0){
             //Draw inverted image.
-        } else if (fx1){
+	    mainImage.draw(x, y);
+        } //fix the else statement here once the multi works properly. 
+	if (fx1){
             whiteStrobe.draw(x, y);
         }
     }
