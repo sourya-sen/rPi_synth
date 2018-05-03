@@ -14,28 +14,14 @@
 	uniform int subSystem;
 	uniform vec2 resolution;
 
-	float getColor(float d, float rad, float t, float offset) {
+	void main( void ) {
 
-	float v = 0.0;
-	for(int i = 1; i < 10; i++) {
-		v += (sin(rad * float(i) + t / pow(float(i), 2.0) + float(i) + offset) * 0.5 + 0.5) * pow(0.5, float(i));
+		vec2 position = ( gl_FragCoord.xy / resolution.xy );
+
+		float color = 0.0;
+		color  = sin( position.x * (6.0 * CV0 * float(subSystem + 1)) + sin( position.y * 12.0 * float(subSystem + 1) + time * 3.0 + 3.14 ) );
+		color *= sin( position.y * (17.0 * CV0 * float(subSystem + 2)) + sin( position.x * 3.0 * float(subSystem + 3) + time * 2.0 ) );
+
+		FRAG_COLOR = vec4(color + CV1, color + CV2, color + CV3, 1.0);
+
 	}
-	v = 1.0 - smoothstep(v, v + 0.27, d);
-	return v;
-}
-
-void main( void ) {
-
-	vec2 st = gl_FragCoord.xy / min(resolution.x, resolution.y) * 2.0 - resolution.xy / min(resolution.x, resolution.y);
-
-	float d = length(st);
-	float rad = atan(st.y, st.x);
-	float t = time * max(1.0, 5.0 * CV0);
-
-	float r = getColor(d, rad, t, -0.125);
-	float g = getColor(d, rad, t,  0.27);
-	float b = getColor(d, rad, t,  0.54);
-
-	FRAG_COLOR = vec4(r, g,  b, 1.0);
-
-}
