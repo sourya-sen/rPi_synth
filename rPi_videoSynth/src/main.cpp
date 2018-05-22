@@ -14,8 +14,7 @@ int main( ){
 
 #endif
     
-    settings.width = 1024;
-    settings.height = 768;
+    settings.setSize(1024, 768);
    
 //    settings.windowMode = OF_WINDOW;
     ofCreateWindow(settings);
