@@ -11,7 +11,7 @@ It is made up of the following ingredients.
 
 2. The rPi_Framework that communicates between the hardware and the Raspberry Pi and sends the current state over OSC to the system.
 
-3. The rPi_videoSynth that listens to the OSC communication and runs the visuals.
+3. The rPi_videoSynth that listens to the OSC communication and runs the visuals. The visuals themselves are fragment shaders that reside in the `/rPi_videoSynth/bin/data/shaders` folder.
 
 And the following extras, **[TODO, not committed to repo yet.]**
 * Scripts to auto run on boot on a Raspberry Pi.
@@ -60,7 +60,7 @@ There are two comparators checking the current toggle states of the gates/switch
 ## Installing
 **Note: I will make a disk image available eventually that can be burned directly to a microSD card, but currently the only way to run this is to install from github.**
 
-This guide assumes you are running the latest version of Raspbian Stretch and have openFrameworks 0.10.0 installed and compiled. This guide also assumes that openFrameworks is installed at `/home/pi/openFrameworks`.
+This guide assumes you are running the latest version of Raspbian Stretch and have openFrameworks 0.10.0 installed and compiled. This guide also assumes that openFrameworks is installed at `/home/pi/openFrameworks` and the boot options are set to `Console Autologin`.
 
 1. Get the [ofxGPIO](https://github.com/kashimAstro/ofxGPIO) addon.
   * Navigate to `openFrameworks/addons`
@@ -82,7 +82,20 @@ This guide assumes you are running the latest version of Raspbian Stretch and ha
 If everything went well, at this point you should be ready to run the video synth!
 
 ## Running
-**[TODO]**
+The easiest way to run the two softwares that run the video synth is to use the `runSynth` script.
+
+  * Type `cp /home/pi/openFrameworks/apps/rPi_synth/Resources/runSynth.sh /home/pi` and hit Enter.
+  * Make sure you're on the bottom level of the pi user account by typing `cd` and hitting Enter.
+  * Make the script executable by typing `chmod +x runSynth.sh`
+  * Run the synth by typing `./runSynth` and hitting Enter!
+
+To avoid having to run the video synth by running the command with a keyboard every tine, you can make the Pi run the `runSynth` script on startup by adding it to the `rc.local` file.
+
+  * Type `sudo nano /etc/rc.local` and hit Enter.
+  * Add `./runSynth &` at the end of the file.
+  * Save the file and exit.
+
+Now, everytime the Raspberry Pi is switched on, it will boot directly into the synth!
 
 ## Writing Own Visuals
 **[TODO]**
