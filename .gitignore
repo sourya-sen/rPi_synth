@@ -1,59 +1,34 @@
-#########################
-# openFrameworks patterns
-#########################
+###########################
+# ignore generated binaries
+# but not the data folder
+###########################
 
-# build files
-openFrameworks.a
-openFrameworksDebug.a
-openFrameworksUniversal.a
-libs/openFrameworksCompiled/lib/*/*
-!libs/openFrameworksCompiled/lib/*/.gitkeep
+*/bin/*
+!*/bin/data/
 
-# apothecary
-scripts/apothecary
+# but ignore the .glsl files in the shaders folder!
 
-# rule to avoid non-official addons going into git
-# see addons/.gitignore
-addons/*
+*/bin/data/shaders/*.glsl
 
-# rule to avoid non-official apps going into git
-# see apps/.gitignore
-apps/*
-
-# rule to ignore compiled / downloaded libs
-/libs/*
-!/libs/openFrameworks
-!/libs/openFrameworksCompiled
-
-# also, see examples/.gitignore
-
-#########################
+#########
 # general
-#########################
+#########
 
-[Bb]uild/
-[Oo]bj/
+*/[Bb]uild/
+*/[Oo]bj/
 *.o
-examples/**/[Dd]ebug*/
-examples/**/[Rr]elease*/
-examples/**/gcc-debug/
-examples/**/gcc-release/
-tests/**/[Dd]ebug*/
-tests/**/[Rr]elease*/
-tests/**/gcc-debug/
-tests/**/gcc-release/
+*/[Dd]ebug*/
+*/[Rr]elease*/
 *.mode*
 *.app/
 *.pyc
 .svn/
 *.log
-*.cpp.eep
-*.cpp.elf
-*.cpp.hex
 
-#########################
-# IDE
-#########################
+########################
+# IDE files which should
+# be ignored
+########################
 
 # XCode
 *.pbxuser
@@ -83,22 +58,9 @@ ipch/
 local.properties
 .externalToolBuilders
 
-# Android Studio
-.idea
-.gradle
-gradle
-gradlew
-gradlew.bat
-
-# QtCreator
-*.qbs.user
-*.pro.user
-*.pri
-
-
-#########################
+##################
 # operating system
-#########################
+##################
 
 # Linux
 *~
@@ -112,27 +74,12 @@ gradlew.bat
 *~.nib
 # Thumbnails
 ._*
-examples/ios/**/mediaAssets
 
 # Windows
-# Windows image file caches
+# Image file caches
 Thumbs.db
 # Folder config file
 Desktop.ini
 
 # Android
 .csettings
-/libs/openFrameworksCompiled/project/android/paths.make
-
-# Android Studio
-*.iml
-
-#########################
-# miscellaneous
-#########################
-
-.mailmap
-/apps*/
-
-# this is different for different platforms so ignoring it here
-*.glsl
