@@ -60,13 +60,28 @@ There are two comparators checking the current toggle states of the gates/switch
 ## Installing
 **Note: I will make a disk image available eventually that can be burned directly to a microSD card, but currently the only way to run this is to install from github.**
 
-The software is written using openFrameworks. Follow the instructions to download and install openFrameworks as documented on their website.
+This guide assumes you are running the latest version of Raspbian Stretch and have openFrameworks 0.10.0 installed and compiled. This guide also assumes that openFrameworks is installed at `/home/pi/openFrameworks`.
 
-**Note: The current version used in the project is 0.9.8 Nightly which requires jumping through a few hoops to get working on Raspbian Stretch, but I will be testing v0.10.0 soon and upgrade the project to the current stable version of openFrameworks asap.**
+1. Get the [ofxGPIO](https://github.com/kashimAstro/ofxGPIO) addon.
+  * Navigate to `openFrameworks/addons`
+  * Clone the ofxGPIO library by typing `git clone https://github.com/kashimAstro/ofxGPIO` and press Enter.
 
-*Instructions to install will follow once the stable version of oF is tested.*
+2. Clone this repository.
+  * Navigate to `openFrameworks/apps` (Note: Just apps, not myApps).
+  * Type `git clone https://github.com/sourya-sen/rPi_synth` and press Enter.
 
-## Compiling, Running and Customising
+3. Compile **both** the apps separately.
+  * Navigate to `openFrameworks/apps/rPi_synth/rPi_Framework`
+  * Type `sudo make`, wait for it to finish compiling.
+  * Navigate to `openFrameworks/apps/rPi_synth/rPi_videoSynth`
+  * Type `sudo make`, wait for it to finish compiling.
+
+4. Copy the header files required to run the shaders.
+  * type `cp /home/pi/openFrameworks/apps/rPi_synth/Resources/shaderHeaders/pi/* /home/pi/openFrameworks/apps/rPi_synth/rPi_videoSynth/bin/data/shaders` and hit Enter.
+
+If everything went well, at this point you should be ready to run the video synth!
+
+## Running
 **[TODO]**
 
 ## Writing Own Visuals
