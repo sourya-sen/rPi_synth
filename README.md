@@ -89,13 +89,13 @@ The easiest way to run the two softwares that run the video synth is to use the 
   * Make the script executable by typing `chmod +x runSynth.sh`
   * Run the synth by typing `./runSynth` and hitting Enter!
 
-To avoid having to run the video synth by running the command with a keyboard every tine, you can make the Pi run the `runSynth` script on startup by adding it to the `rc.local` file.
+To avoid having to run the video synth by running the command with a keyboard every time, you can make the Pi run the `runSynth` script on startup by adding it to the `rc.local` file.
 
   * Type `sudo nano /etc/rc.local` and hit Enter.
   * Add `sh /home/pi/runSynth.sh &` at the end of the file.
   * Save the file and exit.
 
-Now, everytime the Raspberry Pi is switched on, it will boot directly into the synth!
+Now, every time the Raspberry Pi is switched on, it will boot directly into the synth!
 
 ## Writing Own Visuals
 **[TODO]**
