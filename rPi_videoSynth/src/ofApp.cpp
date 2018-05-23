@@ -14,7 +14,7 @@ static int bToD(unsigned num){
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    ofSetFrameRate(25);
+   // ofSetFrameRate(25);
     
     ofDisableArbTex();
     
