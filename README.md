@@ -13,9 +13,9 @@ It is made up of the following ingredients.
 
 3. The rPi_videoSynth that listens to the OSC communication and runs the visuals. The visuals themselves are fragment shaders that reside in the `/rPi_videoSynth/bin/data/shaders` folder.
 
-And the following extras, **[TODO, not committed to repo yet.]**
+And the following extras,
 * Scripts to auto run on boot on a Raspberry Pi.
-* A desktop GUI simulating the hardware OSC communication for testing without the hardware. (Note: The performance is going to be vastly different and check documentation of writing cross platform shaders in the shaders folder).
+* A desktop GUI simulating the hardware OSC communication for testing without the hardware. (Note: The performance is going to be vastly different and check documentation of writing cross platform shaders in the shaders folder).  **[TODO, not committed to repo yet.]**
 
 ![Front Panel](Documentation/frontpanel.jpeg?raw=true "Front Panel")
 The hardware has 4 CV inputs and 8 Gate inputs.
@@ -28,7 +28,7 @@ The last three toggles/gates switch on/off an effects patch (not implemented yet
 
 Each can be selected by the toggle switches, but plugging in a gate signal overrides the toggle switch.
 
-Each visual system (and it's subsequent sub system) has 4 parameters that can be controlled by the potentiometers. They also allow CV input and when CV input is present, the potentiometers become attenuators for the CV input. The range and response of the CV inputs (unipolar, bipolar, exponential) can be changed, they're currently hardcoded in the software but will be replaced by an user editable XML file in a later revision.
+Each visual system (and it's subsequent sub system) have 4 parameters that can be controlled by the potentiometers. They also allow CV input and when CV input is present, the potentiometers become attenuators for the CV input. The range and response of the CV inputs (unipolar, bipolar, exponential) can be changed, they're currently hardcoded in the software but will be replaced by an user editable XML file in a later revision.
 
 ## About the Hardware
 The schematics are available in the `Documentation` folder.
