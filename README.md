@@ -15,7 +15,7 @@ It is made up of the following ingredients.
 
 And the following extras,
 * Scripts to auto run on boot on a Raspberry Pi.
-* A desktop GUI simulating the hardware OSC communication for testing without the hardware. (Note: The performance is going to be vastly different and check documentation of writing cross platform shaders in the shaders folder).  **[TODO, not committed to repo yet.]**
+* A desktop GUI simulating the hardware OSC communication for testing without the hardware. (Note: The performance is going to be vastly different and check documentation of writing cross platform shaders in the shaders folder).  **[TODO: Add desktop usage documentation]**
 
 ![Front Panel](Documentation/frontpanel.jpeg?raw=true "Front Panel")
 The hardware has 4 CV inputs and 8 Gate inputs.
