@@ -53,10 +53,10 @@ void ofApp::setup(){
     
     ofSetBackgroundColor(0);
     lastSystem = -1;
-    
-    ofSetFullscreen(true);
+
     
 #ifdef TARGET_OPENGLES
+    ofSetFullscreen(true);
     ofHideCursor();
 #endif
     
