@@ -5,8 +5,8 @@
 #include "ControlVoltage.h"
 
 #define PORT 12345
-#define WIDTH 1024
-#define HEIGHT 768
+#define WIDTH 1280
+#define HEIGHT 720
 
 class ofApp : public ofBaseApp{
 
