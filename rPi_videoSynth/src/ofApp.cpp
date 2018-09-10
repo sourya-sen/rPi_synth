@@ -53,7 +53,7 @@ void ofApp::setup(){
     
     ofSetBackgroundColor(0);
     lastSystem = -1;
-
+    
     
 #ifdef TARGET_OPENGLES
     ofSetFullscreen(true);
@@ -108,7 +108,7 @@ void ofApp::update(){
     mainImage.end();
     
     //----------> EFFECTS INTEGRATION FBO (TO DO).
-
+    
     
     
 }
@@ -131,13 +131,13 @@ void ofApp::draw(){
     } else {
         if(fx0){
             //Draw inverted image.
-	    mainImage.draw(x, y, ofGetWidth(), drawingHeight);
-        } //fix the else statement here once the multi works properly. 
-	if (fx1){
+            mainImage.draw(x, y, ofGetWidth(), drawingHeight);
+        } //fix the else statement here once the multi works properly.
+        if (fx1){
             whiteStrobe.draw(x, y, ofGetWidth(), drawingHeight);
         }
     }
-   
+    
     
     //-------------> DEBUG MESSAGES, IF ENABLED.
     if(debugMode){
@@ -145,7 +145,7 @@ void ofApp::draw(){
         ofDrawBitmapStringHighlight("Sub System: " + ofToString(subSystem), 10, 35);
         ofDrawBitmapStringHighlight("FXs:" + ofToString(fx0) + " " + ofToString(fx1) + " " + ofToString(fx2), 10, 55);
         ofDrawBitmapStringHighlight("Uniform CVs:" + ofToString(u_CV[0]) + " " + ofToString(u_CV[1]) + " " + ofToString(u_CV[2]) + " " + ofToString(u_CV[3]), 10, 75);
-	ofDrawBitmapStringHighlight("Incoming CVs:" + ofToString(CVin[4].getFiltered()) + " " + ofToString(CVin[5].getFiltered()) + " " + ofToString(CVin[6].getFiltered()) + " " + ofToString(CVin[7].getFiltered()), 10, 95);	
+        ofDrawBitmapStringHighlight("Incoming CVs:" + ofToString(CVin[4].getFiltered()) + " " + ofToString(CVin[5].getFiltered()) + " " + ofToString(CVin[6].getFiltered()) + " " + ofToString(CVin[7].getFiltered()), 10, 95);
         
         ofDrawBitmapStringHighlight("Running at: " + ofToString(ofGetWidth()) + " by " + ofToString(ofGetHeight()) + " at " + ofToString(ofGetFrameRate())
                                     , 10, ofGetHeight() - 30);
