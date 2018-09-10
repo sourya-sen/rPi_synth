@@ -45,7 +45,7 @@ void ofApp::setup(){
     
     whiteStrobe.begin();
     ofSetColor(255, 255, 255);
-    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+    ofDrawRectangle(0, 0, WIDTH, HEIGHT);
     whiteStrobe.end();
     
     debugMode = false;
@@ -117,28 +117,24 @@ void ofApp::update(){
 void ofApp::draw(){
     
     
-    //----------> MAKING SURE THE 1024X768 WINDOW ALWAYS DRAWS IN THE CENTRE.
+    //----------> MAKING SURE THE FBO SCALES AND DRAWS CORRECTLY.
+    
+    float scaleFactor = ofGetWidth() / float(WIDTH);
+    float drawingHeight = HEIGHT * scaleFactor;
+    
     float x = 0;
-    float y = 0;
-    
-    if(ofGetWidth() != WIDTH){
-        x = (ofGetWidth() - WIDTH)/2.0;
-    }
-    
-    if(ofGetHeight() != HEIGHT){
-        y = (ofGetHeight() - HEIGHT)/2.0;
-    }
+    float y = (ofGetHeight() - drawingHeight) / 2.0;
     
     //------------> WHICH FBO TO DRAW?
     if((!fx0) && (!fx1)){
-        mainImage.draw(x, y);
+        mainImage.draw(x, y, ofGetWidth(), drawingHeight);
     } else {
         if(fx0){
             //Draw inverted image.
-	    mainImage.draw(x, y);
+	    mainImage.draw(x, y, ofGetWidth(), drawingHeight);
         } //fix the else statement here once the multi works properly. 
 	if (fx1){
-            whiteStrobe.draw(x, y);
+            whiteStrobe.draw(x, y, ofGetWidth(), drawingHeight);
         }
     }
    
@@ -186,7 +182,7 @@ void ofApp::runSystem(int _sys){
     
     selectedShader->begin();
     sendUniforms(selectedShader);
-    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+    ofDrawRectangle(0, 0, WIDTH, HEIGHT);
     selectedShader->end();
     
     
