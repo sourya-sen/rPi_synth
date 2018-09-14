@@ -39,6 +39,8 @@ void ofApp::setup(){
     shaders.resize(8);
     loadShaders();
     
+    invert.load("shaders/standard.vert", "shaders/invert.frag");
+    
     mainImage.allocate(WIDTH, HEIGHT, GL_RGB);
     whiteStrobe.allocate(WIDTH, HEIGHT, GL_RGB);
     invertedImage.allocate(WIDTH, HEIGHT, GL_RGB);
@@ -107,7 +109,23 @@ void ofApp::update(){
     
     mainImage.end();
     
-    //----------> EFFECTS INTEGRATION FBO (TO DO).
+    //----------> EFFECTS INTEGRATION FBO (DOESN'T WORK FOR SOME REASON).
+    
+    if(fx0){
+        
+        //cout << "updating inverted image" << endl;
+        
+        invertedImage.begin();
+        ofClear(0);
+        invert.begin();
+        invert.setUniformTexture("tex", mainImage.getTexture(), 0);
+        invert.setUniform1f("time", ofGetElapsedTimef());
+        invert.setUniform1i("subSystem", subSystem);
+        invert.setUniform2f("resolution", ofVec2f(WIDTH, HEIGHT));
+        ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+        invert.end();
+        invertedImage.end();
+    }
     
     
     
@@ -128,8 +146,9 @@ void ofApp::draw(){
     //------------> WHICH FBO TO DRAW?
     if(fx2){
         if(fx0){
-            //draw inverted image, right now not implemented.
-            mainImage.draw(x, y, ofGetWidth(), drawingHeight);
+            //inverted image draw.
+            //cout << "Drawing inverted shaded" << endl;
+            invertedImage.draw(x, y, ofGetWidth(), drawingHeight);
         }
         if(fx1){
             //draw white frame.
@@ -273,7 +292,6 @@ void ofApp::mouseExited(int x, int y){
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
     
-    //    mainImage.allocate(ofGetWidth(), ofGetHeight());
     
 }
 

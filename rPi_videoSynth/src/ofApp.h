@@ -50,5 +50,7 @@ class ofApp : public ofBaseApp{
     ofFbo mainImage;
     ofFbo whiteStrobe;
     ofFbo invertedImage;
+    
+    ofShader invert;
 		
 };
