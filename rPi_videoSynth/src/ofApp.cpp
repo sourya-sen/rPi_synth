@@ -126,18 +126,20 @@ void ofApp::draw(){
     float y = (ofGetHeight() - drawingHeight) / 2.0;
     
     //------------> WHICH FBO TO DRAW?
-    if((!fx0) && (!fx1)){
-        mainImage.draw(x, y, ofGetWidth(), drawingHeight);
-    } else {
+    if(fx2){
         if(fx0){
-            //Draw inverted image.
+            //draw inverted image, right now not implemented.
             mainImage.draw(x, y, ofGetWidth(), drawingHeight);
-        } //fix the else statement here once the multi works properly.
-        if (fx1){
+        }
+        if(fx1){
+            //draw white frame.
             whiteStrobe.draw(x, y, ofGetWidth(), drawingHeight);
         }
+        else{
+            //if nothing else...
+            mainImage.draw(x, y, ofGetWidth(), drawingHeight);
+        }
     }
-    
     
     //-------------> DEBUG MESSAGES, IF ENABLED.
     if(debugMode){
