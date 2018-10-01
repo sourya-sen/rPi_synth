@@ -23,7 +23,7 @@
 void main() {
 	vec2 uv = (2. * gl_FragCoord.xy - resolution) / resolution.y;
 	vec3 color = vec3(0.9);
-	uv *= rotate(time) * rotate(CV3 + time);
+	uv *= rotate(time) * rotate(CV3 * time);
 	uv = abs(uv);
 	vec2 ar = vec2(sin(atan(uv.x, uv.y)) * CV1, length(uv));
 	color = mix(color, vec3(.4, 0., .7) * CV2, sin(8. * (ar.y * 1. - time * CV0) + time * CV0) + (8. * ar.x - 8. * ar.y));

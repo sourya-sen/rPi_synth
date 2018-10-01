@@ -28,6 +28,8 @@ void ofApp::setup(){
     CVin[6].setUnipolar();
     CVin[7].setUnipolar();
     
+    CVin[7].setAlpha(.4); //Does this fix the jitter?
+    
     system = 0;
     subSystem = 0;
     
