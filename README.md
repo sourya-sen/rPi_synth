@@ -6,16 +6,18 @@ This is the central repository for the Hybrid Video Synthesiser project.
 The Hybrid Video Synthesiser, as the name suggests, is a video synthesiser that has digital brains by using a Raspberry Pi but can interface with any analog signal for sequencing, manipulating and/or modulating. This version is compatible with Eurorack standards.
 
 It is made up of the following ingredients.
-1. A custom PCB to interface between the Eurorack signals and the Raspberry Pi.
-**[TODO, Eagle project not committed to the repo yet.]**
+1. A custom PCB to interface between the Eurorack signals and the Raspberry Pi, both EAGLE files and gerbers are made available in the `Hardware` folder.
 
-2. The rPi_Framework that communicates between the hardware and the Raspberry Pi and sends the current state over OSC to the system.
+2. The `rPi_Framework` openFrameworks application that communicates between the hardware and the Raspberry Pi and sends the current state over OSC to the system.
 
-3. The rPi_videoSynth that listens to the OSC communication and runs the visuals. The visuals themselves are fragment shaders that reside in the `/rPi_videoSynth/bin/data/shaders` folder.
+3. The `rPi_videoSynth` openFrameworks application that listens to the OSC communication and runs the visuals. The visuals themselves are fragment shaders that reside in the `/rPi_videoSynth/bin/data/shaders` folder.
+
+4. A illustrator file for the front panel, in the `Hardware` folder.
 
 And the following extras,
 * Scripts to auto run on boot on a Raspberry Pi.
-* A desktop GUI simulating the hardware OSC communication for testing without the hardware. (Note: The performance is going to be vastly different and check documentation of writing cross platform shaders in the shaders folder).  **[TODO, not committed to repo yet.]**
+
+* A desktop GUI simulating the hardware OSC communication for testing without the hardware. The `synth_CVTester` openFrameworks application handles that. **IMPORTANT: If using the videoSynth application on the desktop, use the relevant shader headers. See the install notes below - the only difference is using the desktop shader headers instead of the pi headers in step 4.**
 
 ![Front Panel](Documentation/frontpanel.jpeg?raw=true "Front Panel")
 The hardware has 4 CV inputs and 8 Gate inputs.
@@ -55,7 +57,6 @@ There are two comparators checking the current toggle states of the gates/switch
 
 **Note: Know limitation, the toggles don't activate with very short triggers from the Eurorack, even if the LEDs light up. This _may_ or _may not_ be fixable. To be investigated further. But this arises from the timing differences of the frames per second refresh cycle of the visuals v/s the asynchronous hardware communication.**
 
-**All the Eagle files as well the gerbers will be added to the repository soon if you want to get your own version fabricated!**
 
 ## Installing
 **Note: I will make a disk image available eventually that can be burned directly to a microSD card, but currently the only way to run this is to install from github.**
@@ -98,4 +99,10 @@ To avoid having to run the video synth by running the command with a keyboard ev
 Now, every time the Raspberry Pi is switched on, it will boot directly into the synth!
 
 ## Writing Own Visuals
-**[TODO]**
+If you know how to write fragment shaders, you already know how to write your own visuals! It is also easy to port shaders from [glslsandbox](http://glslsandbox.com/) or [shadertoy](https://www.shadertoy.com/) with some minor changes. The only difference is using the cross platform shader syntax, which you can refer to [here](https://github.com/sourya-sen/oF_crossPlatformShaderExample) for an example. As long as the shaders are named correctly (refer to the existing shader files), they will be available as 'systems' corresponding to the file number. The `.vert` file is common to each fragment shader.
+
+The shaders have multiple uniforms available to them for use. Refer to any preexisting shaders for reference. The shaders are loaded at run time when the application is run and switch accordingly depending on the selected 'system' either through the panel controls or through gate inputs. It is also possible to reload the shaders in the application by pressing `R` on the keyboard. This is handy if you are testing the shaders in the Desktop environment.
+
+In case you need a tutorial on how to write fragment shaders, I'd recommend going through [The Book of Shaders](https://thebookofshaders.com/).
+
+**NOTE: Due to the limited graphics performance capabilities of the Raspberry Pi, it is recommended to thoroughly test each new shader. If a keyboard is attached to the Pi in the testing process, pressing `spacebar` would draw debug strings which will show you the current fps and other relevant data.**
