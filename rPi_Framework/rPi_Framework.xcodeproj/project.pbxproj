@@ -708,7 +708,7 @@
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
-			<key>E65584D2D1754F0B831A48EB</key>
+			<key>ED83A2437D29A281EB713375</key>
 			<dict>
 				<key>explicitFileType</key>
 				<string>sourcecode.c.h</string>
@@ -717,20 +717,50 @@
 				<key>isa</key>
 				<string>PBXFileReference</string>
 				<key>name</key>
-				<string>ControlVoltage.h</string>
+				<string>zenity.h</string>
 				<key>path</key>
-				<string>src/ControlVoltage.h</string>
+				<string>../../../addons/ofxGPIO/src/zenity.h</string>
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
-			<key>8FC279EA6C149D0037E99E91</key>
+			<key>4A1A5C4F96885E1F62BAE4F2</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>spi2.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/spi2.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>64F2148763F82B2459690057</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>smbus.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/smbus.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>68215645218E4A9020C6021D</key>
 			<dict>
 				<key>fileRef</key>
-				<string>B13636402022D2DEA8ACFCD4</string>
+				<string>B825913CBDCA4061B3FFB084</string>
 				<key>isa</key>
 				<string>PBXBuildFile</string>
 			</dict>
-			<key>B13636402022D2DEA8ACFCD4</key>
+			<key>B825913CBDCA4061B3FFB084</key>
 			<dict>
 				<key>explicitFileType</key>
 				<string>sourcecode.cpp.cpp</string>
@@ -739,9 +769,370 @@
 				<key>isa</key>
 				<string>PBXFileReference</string>
 				<key>name</key>
-				<string>ControlVoltage.cpp</string>
+				<string>smbus.cpp</string>
 				<key>path</key>
-				<string>src/ControlVoltage.cpp</string>
+				<string>../../../addons/ofxGPIO/src/smbus.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>69C04BF97E8DBED29F4230B0</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>servo.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/servo.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>80A31262E216260E34805B7A</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>readata.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/readata.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>EBA92C7BAA353723C0696972</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>pwm.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/pwm.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>AFBC451EC1AC1D9ACF438F51</key>
+			<dict>
+				<key>fileRef</key>
+				<string>506FF80213233B5F39185BBD</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>506FF80213233B5F39185BBD</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>pwm.cpp</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/pwm.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>EC0B00E812AF9260AD361C8F</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>oled.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/oled.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>28D8A4F83A25108337FA6984</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxGPIO.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/ofxGPIO.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>A6CAE00AF711ADB5C7DF0974</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>mcp.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/mcp.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>1142A2A7979E3245AA23192B</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>LogHighLight.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/LogHighLight.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>F8CD4C239A82E6C88DAE49B2</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>led.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/led.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>751910DD36DEB8384C7BE55E</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>kalman.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/kalman.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>3BA65B63979EE6F4D8933206</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>i2c.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/i2c.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>A3BF87393A580D93C16C7444</key>
+			<dict>
+				<key>fileRef</key>
+				<string>DB7492CB8195D982D5C714D2</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>DB7492CB8195D982D5C714D2</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>i2c.cpp</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/i2c.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>9A72C69F1E0926562C195BD5</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>gpio_state.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/gpio_state.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>909235E4809F9C7D47ADC15A</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>gpio.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/gpio.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>AA2F66D9C3B855FB8943F762</key>
+			<dict>
+				<key>fileRef</key>
+				<string>56E69562FC00B85DDC3BF03E</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>56E69562FC00B85DDC3BF03E</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>gpio.cpp</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/gpio.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>88072440903F548046F6D7CE</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>google_image.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/google_image.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>A79B0CB0F4D342F16AA9F657</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>font.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/font.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>A41B7B1AD24015FD684BBB09</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>bcm2835.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/bcm2835.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>6E6AA230E2A8A83C0077E66C</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>A0DD6AC9B594EE8CAA12F122</string>
+					<string>A41B7B1AD24015FD684BBB09</string>
+					<string>A79B0CB0F4D342F16AA9F657</string>
+					<string>88072440903F548046F6D7CE</string>
+					<string>56E69562FC00B85DDC3BF03E</string>
+					<string>909235E4809F9C7D47ADC15A</string>
+					<string>9A72C69F1E0926562C195BD5</string>
+					<string>DB7492CB8195D982D5C714D2</string>
+					<string>3BA65B63979EE6F4D8933206</string>
+					<string>751910DD36DEB8384C7BE55E</string>
+					<string>F8CD4C239A82E6C88DAE49B2</string>
+					<string>1142A2A7979E3245AA23192B</string>
+					<string>A6CAE00AF711ADB5C7DF0974</string>
+					<string>28D8A4F83A25108337FA6984</string>
+					<string>EC0B00E812AF9260AD361C8F</string>
+					<string>506FF80213233B5F39185BBD</string>
+					<string>EBA92C7BAA353723C0696972</string>
+					<string>80A31262E216260E34805B7A</string>
+					<string>69C04BF97E8DBED29F4230B0</string>
+					<string>B825913CBDCA4061B3FFB084</string>
+					<string>64F2148763F82B2459690057</string>
+					<string>4A1A5C4F96885E1F62BAE4F2</string>
+					<string>ED83A2437D29A281EB713375</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>src</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>D1299A5233C6340635C0D5C0</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>6E6AA230E2A8A83C0077E66C</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>ofxGPIO</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>8BA6245D26AD6710A248B016</key>
+			<dict>
+				<key>fileRef</key>
+				<string>A0DD6AC9B594EE8CAA12F122</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>A0DD6AC9B594EE8CAA12F122</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.c</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>bcm2835.c</string>
+				<key>path</key>
+				<string>../../../addons/ofxGPIO/src/bcm2835.c</string>
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
@@ -876,6 +1267,7 @@ fi
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
+						<string>../../../addons/ofxGPIO/src</string>
 						<string>../../../addons/ofxOsc/libs</string>
 						<string>../../../addons/ofxOsc/libs/oscpack</string>
 						<string>../../../addons/ofxOsc/libs/oscpack/src</string>
@@ -944,6 +1336,7 @@ fi
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
+						<string>../../../addons/ofxGPIO/src</string>
 						<string>../../../addons/ofxOsc/libs</string>
 						<string>../../../addons/ofxOsc/libs/oscpack</string>
 						<string>../../../addons/ofxOsc/libs/oscpack/src</string>
@@ -993,6 +1386,7 @@ fi
 			<dict>
 				<key>children</key>
 				<array>
+					<string>D1299A5233C6340635C0D5C0</string>
 					<string>E6053AB7FEC63D5F83825B88</string>
 				</array>
 				<key>isa</key>
@@ -1149,6 +1543,7 @@ fi
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
+						<string>../../../addons/ofxGPIO/src</string>
 						<string>../../../addons/ofxOsc/libs</string>
 						<string>../../../addons/ofxOsc/libs/oscpack</string>
 						<string>../../../addons/ofxOsc/libs/oscpack/src</string>
@@ -1215,6 +1610,7 @@ fi
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
+						<string>../../../addons/ofxGPIO/src</string>
 						<string>../../../addons/ofxOsc/libs</string>
 						<string>../../../addons/ofxOsc/libs/oscpack</string>
 						<string>../../../addons/ofxOsc/libs/oscpack/src</string>
@@ -1279,7 +1675,11 @@ fi
 				<array>
 					<string>E4B69E200A3A1BDC003C02F2</string>
 					<string>E4B69E210A3A1BDC003C02F2</string>
-					<string>8FC279EA6C149D0037E99E91</string>
+					<string>8BA6245D26AD6710A248B016</string>
+					<string>AA2F66D9C3B855FB8943F762</string>
+					<string>A3BF87393A580D93C16C7444</string>
+					<string>AFBC451EC1AC1D9ACF438F51</string>
+					<string>68215645218E4A9020C6021D</string>
 					<string>72A929D3561B8232A182ABFC</string>
 					<string>5864AD82E20F15536D054EA3</string>
 					<string>4ADB88E2FB52E76A471065DE</string>
@@ -1332,7 +1732,7 @@ fi
 				<key>isa</key>
 				<string>PBXNativeTarget</string>
 				<key>name</key>
-				<string>rPi_videoSynth</string>
+				<string>rPi_Framework</string>
 				<key>productName</key>
 				<string>myOFApp</string>
 				<key>productReference</key>
@@ -1349,7 +1749,7 @@ fi
 				<key>isa</key>
 				<string>PBXFileReference</string>
 				<key>path</key>
-				<string>rPi_videoSynthDebug.app</string>
+				<string>rPi_FrameworkDebug.app</string>
 				<key>sourceTree</key>
 				<string>BUILT_PRODUCTS_DIR</string>
 			</dict>
@@ -1378,6 +1778,7 @@ fi
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
+						<string>../../../addons/ofxGPIO/src</string>
 						<string>../../../addons/ofxOsc/libs</string>
 						<string>../../../addons/ofxOsc/libs/oscpack</string>
 						<string>../../../addons/ofxOsc/libs/oscpack/src</string>
@@ -1431,6 +1832,7 @@ fi
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
 						<string>src</string>
+						<string>../../../addons/ofxGPIO/src</string>
 						<string>../../../addons/ofxOsc/libs</string>
 						<string>../../../addons/ofxOsc/libs/oscpack</string>
 						<string>../../../addons/ofxOsc/libs/oscpack/src</string>
@@ -1481,8 +1883,6 @@ fi
 					<string>E4B69E1D0A3A1BDC003C02F2</string>
 					<string>E4B69E1E0A3A1BDC003C02F2</string>
 					<string>E4B69E1F0A3A1BDC003C02F2</string>
-					<string>B13636402022D2DEA8ACFCD4</string>
-					<string>E65584D2D1754F0B831A48EB</string>
 				</array>
 				<key>isa</key>
 				<string>PBXGroup</string>

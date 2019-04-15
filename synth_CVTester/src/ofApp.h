@@ -1,12 +1,11 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxGui.h"
 #include "ofxOsc.h"
-#include "ControlVoltage.h"
 
+#define HOST "localhost"
 #define PORT 12345
-#define WIDTH 1280
-#define HEIGHT 720
 
 class ofApp : public ofBaseApp{
 
@@ -27,30 +26,14 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    void sendUniforms(ofShader * _shader);
-    void runSystem(int _sys);
+    ofxPanel gui;
+    ofxLabel Pots, CV, System, SubSystem, FX;
+   
+    ofxFloatSlider pot0, pot1, pot2, pot3;
+    ofxFloatSlider cv0, cv1, cv2, cv3;
     
-    void loadShaders();
+    ofxToggle gate0, gate1, gate2, gate3, gate4, gate5, gate6, gate7;
     
-    ofxOscReceiver receiver;
-    
-    vector<int> gateIn;
-    vector<ControlVoltage> CVin;
-    vector<double> u_CV;
-    int system, subSystem;
-    int lastSystem;
-    bool fx0, fx1, fx2;
-
-    bool debugMode;
-    bool keyboardMode;
-    
-    vector<ofShader> shaders;
-    ofShader * selectedShader;
-    
-    ofFbo mainImage;
-    ofFbo whiteStrobe;
-    ofFbo invertedImage;
-    
-    ofShader invert;
+    ofxOscSender sender;
 		
 };

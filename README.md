@@ -1,3 +1,5 @@
+**A 32HP EURORACK VIDEO SYNTHESISER**
+
 **NOTE: THIS IS STILL WORK IN PROGRESS, PROCEED AT YOUR OWN RISK! TO SUCCESSFULLY RUN, YOU WILL NEED A FABRICATED PCB, A RASPBERRY PI (TESTED WITH RPI 3) AND A EURORACK SETUP.**
 
 ## Introduction
@@ -16,8 +18,12 @@ It is made up of the following ingredients.
 
 And the following extras,
 * Scripts to auto run on boot on a Raspberry Pi.
+<<<<<<< HEAD
 
 * A desktop GUI simulating the hardware OSC communication for testing without the hardware. The `synth_CVTester` openFrameworks application handles that. **IMPORTANT: If using the videoSynth application on the desktop, use the relevant shader headers. See the install notes below - the only difference is using the desktop shader headers instead of the pi headers in step 4.**
+=======
+* A desktop GUI simulating the hardware OSC communication for testing without the hardware. (Note: The performance is going to be vastly different and check documentation of writing cross platform shaders in the shaders folder).  **[TODO: Add desktop usage documentation]**
+>>>>>>> a8fae7b7b4e6889eb643bc4ba223e473b98c3b94
 
 ![Front Panel](Documentation/frontpanel.jpeg?raw=true "Front Panel")
 The hardware has 4 CV inputs and 8 Gate inputs.

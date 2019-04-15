@@ -14,7 +14,7 @@ static int bToD(unsigned num){
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-   // ofSetFrameRate(25);
+    ofSetFrameRate(25);
     
     ofDisableArbTex();
     
@@ -28,6 +28,8 @@ void ofApp::setup(){
     CVin[6].setUnipolar();
     CVin[7].setUnipolar();
     
+    CVin[7].setAlpha(.4); //Does this fix the jitter?
+    
     system = 0;
     subSystem = 0;
     
@@ -39,13 +41,15 @@ void ofApp::setup(){
     shaders.resize(8);
     loadShaders();
     
+    invert.load("shaders/standard.vert", "shaders/invert.frag");
+    
     mainImage.allocate(WIDTH, HEIGHT, GL_RGB);
     whiteStrobe.allocate(WIDTH, HEIGHT, GL_RGB);
     invertedImage.allocate(WIDTH, HEIGHT, GL_RGB);
     
     whiteStrobe.begin();
     ofSetColor(255, 255, 255);
-    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+    ofDrawRectangle(0, 0, WIDTH, HEIGHT);
     whiteStrobe.end();
     
     debugMode = false;
@@ -54,9 +58,9 @@ void ofApp::setup(){
     ofSetBackgroundColor(0);
     lastSystem = -1;
     
-    ofSetFullscreen(true);
     
 #ifdef TARGET_OPENGLES
+    ofSetFullscreen(true);
     ofHideCursor();
 #endif
     
@@ -107,8 +111,24 @@ void ofApp::update(){
     
     mainImage.end();
     
-    //----------> EFFECTS INTEGRATION FBO (TO DO).
-
+    //----------> EFFECTS INTEGRATION FBO (DOESN'T WORK FOR SOME REASON).
+    
+    if(fx0){
+        
+        //cout << "updating inverted image" << endl;
+        
+        invertedImage.begin();
+        ofClear(0);
+        invert.begin();
+        invert.setUniformTexture("tex", mainImage.getTexture(), 0);
+        invert.setUniform1f("time", ofGetElapsedTimef());
+        invert.setUniform1i("subSystem", subSystem);
+        invert.setUniform2f("resolution", ofVec2f(WIDTH, HEIGHT));
+        ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+        invert.end();
+        invertedImage.end();
+    }
+    
     
     
 }
@@ -117,31 +137,30 @@ void ofApp::update(){
 void ofApp::draw(){
     
     
-    //----------> MAKING SURE THE 1024X768 WINDOW ALWAYS DRAWS IN THE CENTRE.
+    //----------> MAKING SURE THE FBO SCALES AND DRAWS CORRECTLY.
+    
+    float scaleFactor = ofGetWidth() / float(WIDTH);
+    float drawingHeight = HEIGHT * scaleFactor;
+    
     float x = 0;
-    float y = 0;
-    
-    if(ofGetWidth() != WIDTH){
-        x = (ofGetWidth() - WIDTH)/2.0;
-    }
-    
-    if(ofGetHeight() != HEIGHT){
-        y = (ofGetHeight() - HEIGHT)/2.0;
-    }
+    float y = (ofGetHeight() - drawingHeight) / 2.0;
     
     //------------> WHICH FBO TO DRAW?
-    if((!fx0) && (!fx1)){
-        mainImage.draw(x, y);
-    } else {
+    if(fx2){
         if(fx0){
-            //Draw inverted image.
-	    mainImage.draw(x, y);
-        } //fix the else statement here once the multi works properly. 
-	if (fx1){
-            whiteStrobe.draw(x, y);
+            //inverted image draw.
+            //cout << "Drawing inverted shaded" << endl;
+            invertedImage.draw(x, y, ofGetWidth(), drawingHeight);
+        }
+        if(fx1){
+            //draw white frame.
+            whiteStrobe.draw(x, y, ofGetWidth(), drawingHeight);
+        }
+        else{
+            //if nothing else...
+            mainImage.draw(x, y, ofGetWidth(), drawingHeight);
         }
     }
-   
     
     //-------------> DEBUG MESSAGES, IF ENABLED.
     if(debugMode){
@@ -149,7 +168,7 @@ void ofApp::draw(){
         ofDrawBitmapStringHighlight("Sub System: " + ofToString(subSystem), 10, 35);
         ofDrawBitmapStringHighlight("FXs:" + ofToString(fx0) + " " + ofToString(fx1) + " " + ofToString(fx2), 10, 55);
         ofDrawBitmapStringHighlight("Uniform CVs:" + ofToString(u_CV[0]) + " " + ofToString(u_CV[1]) + " " + ofToString(u_CV[2]) + " " + ofToString(u_CV[3]), 10, 75);
-	ofDrawBitmapStringHighlight("Incoming CVs:" + ofToString(CVin[4].getFiltered()) + " " + ofToString(CVin[5].getFiltered()) + " " + ofToString(CVin[6].getFiltered()) + " " + ofToString(CVin[7].getFiltered()), 10, 95);	
+        ofDrawBitmapStringHighlight("Incoming CVs:" + ofToString(CVin[4].getFiltered()) + " " + ofToString(CVin[5].getFiltered()) + " " + ofToString(CVin[6].getFiltered()) + " " + ofToString(CVin[7].getFiltered()), 10, 95);
         
         ofDrawBitmapStringHighlight("Running at: " + ofToString(ofGetWidth()) + " by " + ofToString(ofGetHeight()) + " at " + ofToString(ofGetFrameRate())
                                     , 10, ofGetHeight() - 30);
@@ -186,7 +205,7 @@ void ofApp::runSystem(int _sys){
     
     selectedShader->begin();
     sendUniforms(selectedShader);
-    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+    ofDrawRectangle(0, 0, WIDTH, HEIGHT);
     selectedShader->end();
     
     
@@ -275,7 +294,6 @@ void ofApp::mouseExited(int x, int y){
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
     
-    //    mainImage.allocate(ofGetWidth(), ofGetHeight());
     
 }
 
