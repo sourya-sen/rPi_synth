@@ -4,7 +4,7 @@ Update (August 2019): This was the subject of my Master's thesis at Aalto Media 
 
 The project is currently on hold as I want to upgrade and test with a Raspberry Pi 4 for performance benefits as well as update the hardware with a few fixes and design strategies that were found to be lacking in the current version. However, this version continues to work and if you are looking to build and run one for yourself, I am available to help in any troubleshooting.
 
-[Here is the unit in action as part of my an audiovisual performance at Live Performers Meet 2018.](https://vimeo.com/277031718)
+[Here is the unit in action as part of my an audiovisual performance at Live Performers Meet 2018.](https://vimeo.com/277031718/060efab75c)
 
 **NOTE: THIS IS STILL WORK IN PROGRESS, PROCEED AT YOUR OWN RISK! TO SUCCESSFULLY RUN, YOU WILL NEED A FABRICATED PCB, A RASPBERRY PI (TESTED WITH RPI 3) AND A EURORACK SETUP.**
 
