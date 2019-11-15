@@ -35,5 +35,5 @@ void main(void) {
 
 	col = max(mod(col, 0.4), min(col, max(0.8, 4.0 * CV0)));
 
-	FRAG_COLOR = vec4(col * CV1, col * (0.5 + CV2), col * (0.5 + CV3), 1.0);
+	FRAG_COLOR = vec4(col * CV1, col * (0.5 + CV3), col * (0.5 + CV2), 1.0);
 }

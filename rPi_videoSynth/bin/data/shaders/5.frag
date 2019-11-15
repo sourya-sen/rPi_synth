@@ -1,4 +1,4 @@
-// based on http://glslsandbox.com/e#47766.0
+// based on http://www.glslsandbox.com/e#56924.0
 #pragma include "headerFrag.glsl"
 
 uniform sampler2D tex;
@@ -17,12 +17,29 @@ uniform vec2 resolution;
 
 #define PI 3.14159
 
-void main( void ) {
+//5 - 100 : 1
+#define grid 69.0
+//0.2 - 0.6 : 0.1 
+#define thickness 1.9
+//0.0 - 10 : 1.0
+#define red 5.0
 
-	vec2 p = ( gl_FragCoord.xy / resolution.xy ) - 0.5;
-	float sx = 0.75 * CV0 * (p.x + 0.5) * sin( 25.0 * p.x - 10. * (time + CV3));
-	float dy = 1./ ( 20. * abs(p.y - sx));
-	dy += 1./ (20. * length(p - vec2(p.x, 0.)));
-	FRAG_COLOR = vec4( (p.x + 0.1 * CV1) * dy, (0.9 - CV1) * dy, dy * CV2, 1.0 );
+float rand(vec2 co)
+{
+  return fract(sin(dot(co.xy, resolution)) * 65000.98432);
+}
+
+void main( void )
+{
+
+	vec2 v = gl_FragCoord.xy  / (subSystem * 100. + 100.);
+	
+	v -= time + vec2(sin(v.y) * CV0, cos(v.x) * CV1);
+	
+	float brightness = fract(rand(floor(v)) + time);
+	float hue = fract(rand(floor(v) + 1.) + time);
+
+	brightness *= thickness - length(fract(v) - vec2(thickness, thickness));
+	FRAG_COLOR = vec4(brightness * red, hue*brightness*(10.0 - red), 0., 1.0);
 
 }
