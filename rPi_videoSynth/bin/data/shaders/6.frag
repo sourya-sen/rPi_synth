@@ -1,24 +1,24 @@
-#pragma include "headerFrag.glsl"
 //Modified from http://glslsandbox.com/e#48925.0
+#pragma include "headerFrag.glsl"
 
-	uniform sampler2D tex;
+uniform sampler2D tex;
 
-	IN vec4 v_color;
-  	IN vec2 v_texCoord;
-  	IN vec4 v_normal;
+IN vec4 v_color;
+IN vec2 v_texCoord;
+IN vec4 v_normal;
 
-	uniform float CV0;
-	uniform float CV1;
-	uniform float CV2;
-	uniform float CV3;
-	uniform float time;
-	uniform int subSystem;
-	uniform vec2 resolution;
+uniform float CV0;
+uniform float CV1;
+uniform float CV2;
+uniform float CV3;
+uniform float time;
+uniform int subSystem;
+uniform vec2 resolution;
 
-	mat2 rotate(float a) {
+mat2 rotate(float a) {
 	float c = cos(a), s = sin(a);
 	return mat2(c, -s, s, c);
-	}
+}
 
 void main() {
 	vec2 uv = (2. * gl_FragCoord.xy - resolution) / resolution.y;
