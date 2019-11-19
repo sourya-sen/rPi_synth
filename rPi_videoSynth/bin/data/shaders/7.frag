@@ -18,25 +18,25 @@ uniform vec2 resolution;
 
 void main(void)
 {
-	vec3 rColor = vec3(0.9,0.0,subSystem/10.);
-    vec3 gColor = vec3(0.9, subSystem/10.,subSystem/100.);
-    vec3 bColor = vec3(0.9,0.0,subSystem/2.);
-    vec3 yColor = vec3(0.9, subSystem/4.0, 0.0);
-	
-	
+		vec3 rColor = vec3(1.0,0.0,0.0);
+    vec3 gColor = vec3(0.9, 0.0, 0.0);
+    vec3 bColor = vec3((subSystem % 2 )/10.0);
+    vec3 yColor = vec3(subSystem/4.0, subSystem/4.0, subSystem/4.0);
+
+
     vec2 p = (gl_FragCoord.xy*2.0-resolution);
     p /= min(resolution.x,resolution.y);
-    
+
     float a = cos(p.y*1.5 - time*0.5)/1.0 * CV0;
     float b = cos(p.y*1.5 - time*0.2)/1.0 * CV1;
     float c = sin(p.y*1.5 - time*0.3 + 3.14)/1.0 * CV2;
     float d = cos(p.y*1.5 - time*0.5 + 3.14)/1.0 * CV3;
-    
+
     float e = 0.2 / abs(p.x + a);
     float f = 0.1 / abs(p.x + b);
     float g = 0.1 / abs(p.x + c);
     float h = 0.1 / abs(p.x + d);
-    
+
     vec3 destColor = rColor * e + gColor * f + bColor * g + yColor * h;
     FRAG_COLOR = vec4(destColor,1.0);
 }

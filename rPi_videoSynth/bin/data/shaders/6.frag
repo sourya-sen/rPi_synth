@@ -25,8 +25,8 @@ void main() {
 	vec3 color = vec3(0.9);
 	uv *= rotate(time) * rotate(CV1 * time);
 	uv = abs(uv);
-	vec2 ar = vec2(sin(atan(uv.x, uv.y)) * CV3, length(uv));
-	color = mix(color, vec3(.4, 0., .7) * CV2, sin(8. * (ar.y * 1. - time * CV0) + time * CV0) + (8. * ar.x - 8. * ar.y));
-	color = mix(color, vec3(.7, .2, 0.), cos(8. ) * (5. * ar.y - 8. * ar.x));
+	vec2 ar = vec2(sin(atan(uv.x, uv.y)) * (subSystem + 1.), length(uv));
+	color = mix(color, vec3(.9, 0., .0) * CV2, sin(8. * (ar.y * 1. - time * CV0) + time * CV0) + (8. * ar.x - 8. * ar.y));
+	color = mix(color, vec3(.7, .2, 0.), cos((2.0 + CV3) ) * (5. * ar.y - 8. * ar.x));
 	FRAG_COLOR = vec4(subSystem - color, 1.);
 }

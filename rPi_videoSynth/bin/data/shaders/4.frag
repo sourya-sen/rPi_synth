@@ -15,8 +15,8 @@ uniform int subSystem;
 uniform vec2 resolution;
 
 float ball(vec2 p, float fx, float fy, float ax, float ay) {
-	vec2 r = vec2(p.x + sin(time * fx) * ax, p.y + cos(time * fy) * ay);
-	return 0.09 / length(r);
+	vec2 r = vec2(p.x + sin(time * fx) * ax * CV0, p.y + cos(time * fy) * ay * CV1);
+	return abs(0.2 * min(0.4, 2. * CV3) / length(r));
 }
 
 void main(void) {
@@ -33,7 +33,7 @@ void main(void) {
 	col += ball(p, 1.5, 0.5, 0.6, 0.7 * float(subSystem));
 	col += ball(p, 0.1 * float(subSystem + 3), .5, 0.6, 0.7);
 
-	col = max(mod(col, 0.4), min(col, max(0.8, 4.0 * CV0)));
+	col = max(mod(col, 0.4), min(col, 0.9));
 
-	FRAG_COLOR = vec4(col * CV1, col * (0.5 + CV3), col * (0.5 + CV2), 1.0);
+	FRAG_COLOR = vec4(1.0, max(col * CV2, 0.3), max(col * CV2, 0.3), 1.0);
 }
