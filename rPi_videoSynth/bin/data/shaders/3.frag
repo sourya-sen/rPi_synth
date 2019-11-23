@@ -39,8 +39,8 @@ vec2 rotateTilePattern(vec2 _st){
     //  Give each cell an index number
     //  according to its position
     float index = subSystem;
-    index += step(1., mod(_st.x,2.0));
-    index += step(1., mod(_st.y,2.0))*1.0;
+    index += step(1., mod(_st.x,2));
+    index += step(1., mod(_st.y,2))*1.0;
 
     //      |
     //  2   |   3

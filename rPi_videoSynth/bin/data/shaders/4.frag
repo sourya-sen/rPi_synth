@@ -26,12 +26,12 @@ void main(void) {
 
 	float col = 0.0;
 	//col += ball(p, 2.0, 3.0, 4.1, 5.2);
-	col += ball(p, 1.5 * float(subSystem + 1), 2.5, 0.2, 0.3);
-	col += ball(p, 1.0, 4.0, 0.5 * float(subSystem + 2), 0.4);
+	col += ball(p, 1.5 * float(subSystem + 1.0), 2.5, 0.2, 0.3);
+	col += ball(p, 1.0, 4.0, 0.5 * float(subSystem + 2.0), 0.4);
 	col += ball(p, 2.5, 3.5, 0.4, 0.5);
 	col += ball(p, 3.0, 4.0, 0.5, 0.6);
 	col += ball(p, 1.5, 0.5, 0.6, 0.7 * float(subSystem));
-	col += ball(p, 0.1 * float(subSystem + 3), .5, 0.6, 0.7);
+	col += ball(p, 0.1 * float(subSystem + 3.0), .5, 0.6, 0.7);
 
 	col = max(mod(col, 0.4), min(col, 0.9));
 
