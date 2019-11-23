@@ -1,6 +1,6 @@
 //original code from http://glslsandbox.com/e#45360.0
 #pragma include "headerFrag.glsl"
-		
+
 uniform sampler2D tex;
 
 IN vec4 v_color;

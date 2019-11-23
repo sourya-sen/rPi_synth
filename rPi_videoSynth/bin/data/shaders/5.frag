@@ -38,9 +38,9 @@ vec2 rotateTilePattern(vec2 _st){
 
     //  Give each cell an index number
     //  according to its position
-    float index = subSystem;
+    float index = float(subSystem);
     index += step(1., mod(_st.x,2));
-    index += step(1., mod(_st.y,2))*1.0;
+    index += step(1., mod(_st.y,2));
 
     //      |
     //  2   |   3
@@ -68,7 +68,7 @@ vec2 rotateTilePattern(vec2 _st){
     return _st;
 }
 
-void main (void) {
+void main () {
     vec2 st = gl_FragCoord.xy/resolution.xy;
 
     st = tile(st, 3.0 * CV0);

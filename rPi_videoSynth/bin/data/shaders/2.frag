@@ -14,7 +14,7 @@ uniform float time;
 uniform int subSystem;
 uniform vec2 resolution;
 
-void main( void ) {
+void main() {
 
 vec2 position = ( gl_FragCoord.xy / resolution.xy );
 
