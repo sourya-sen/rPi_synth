@@ -20,8 +20,10 @@ void main()
 {
 		vec3 redColor = vec3(1.0,0.0,0.0);
     vec3 greenColor = vec3(0.9, 0.0, 0.0);
-    vec3 blueColor = vec3((mod(subSystem, 2)/10.0);
-    vec3 yellowColor = vec3(subSystem/4.0, subSystem/4.0, subSystem/4.0);
+		float s = 1.0;
+		s *= float(subSystem);
+    vec3 blueColor = vec3((mod(s, 2.0)))/10.0;
+    vec3 yellowColor = vec3(s/4.0, s/4.0, s/4.0);
 
 
     vec2 p = (gl_FragCoord.xy*2.0-resolution);

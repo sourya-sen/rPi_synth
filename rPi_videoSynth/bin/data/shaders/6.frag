@@ -23,10 +23,12 @@ mat2 rotate(float a) {
 void main() {
 	vec2 uv = (2. * gl_FragCoord.xy - resolution) / resolution.y;
 	vec3 color = vec3(0.9);
-	//uv *= rotate(time) * rotate(CV1 * time);
-	//uv = abs(uv);
-	vec2 ar = vec2(sin(atan(uv.x, uv.y)) * (subSystem + 1.), length(uv));
+	uv *= rotate(time) * rotate(CV1 * time);
+	uv = abs(uv);
+	float t = 1.0;
+	t *= float(subSystem);
+	vec2 ar = vec2(sin(atan(uv.x, uv.y)) * (t + 1.), length(uv));
 	color = mix(color, vec3(.9, 0., .0) * CV2, sin(8. * (ar.y * 1. - time * CV0) + time * CV0) + (8. * ar.x - 8. * ar.y));
 	color = mix(color, vec3(.7, .2, 0.), cos((2.0 + CV3) ) * (5. * ar.y - 8. * ar.x));
-	FRAG_COLOR = vec4(subSystem - color, 1.);
+	FRAG_COLOR = vec4(t - color, 1.);
 }

@@ -38,9 +38,14 @@ vec2 rotateTilePattern(vec2 _st){
 
     //  Give each cell an index number
     //  according to its position
-    float index = float(subSystem);
-    index += step(1., mod(_st.x,2));
-    index += step(1., mod(_st.y,2));
+    float index = 1.0;
+    index *= float(subSystem);
+
+    float modx = mod(_st.x, 2.0);
+    float mody = mod(_st.y, 2.0);
+
+    index += step(1.0, modx);
+    index += step(1.0, mody);
 
     //      |
     //  2   |   3
@@ -71,11 +76,14 @@ vec2 rotateTilePattern(vec2 _st){
 void main () {
     vec2 st = gl_FragCoord.xy/resolution.xy;
 
-    st = tile(st, 3.0 * CV0);
+    float s = 3.0 * CV0;
+
+    st = tile(st, s);
     st = rotateTilePattern(st);
 
     // Make more interesting combinations
-    st = tile(st, max(0.1, 2.0 * subSystem));
+    float n = 2.0 * float(subSystem);
+    st = tile(st, max(0.1, n));
     // st = rotate2D(st,-PI*time*0.25);
     // st = rotateTilePattern(st*2.);
     // st = rotate2D(st,PI*time*0.25);
